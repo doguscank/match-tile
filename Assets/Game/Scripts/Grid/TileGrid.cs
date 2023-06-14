@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MatchTile.TileBar
+namespace MatchTile.Grid
 {
-    public class TileBar : MonoBehaviour
+    public class TileGrid : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

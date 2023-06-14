@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IBaseTile
+namespace MatchTile.Tile
 {
-    bool IsLocked { get; set; }
+    public interface IBaseTile
+    {
+        bool IsLocked { get; set; }
+        TileType TileType { get; set; }
 
-    List<IBaseTile> TopTiles { get; set; }
-    List<IBaseTile> BottomTiles { get; set; }
+        List<IBaseTile> TopTiles { get; set; }
+        List<IBaseTile> BottomTiles { get; set; }
 
-    void Lock();
-    void Unlock();
+        void Lock();
+        void Unlock();
+
+    }
 }
