@@ -6,14 +6,16 @@ namespace MatchTile.Tile
 {
     public interface IBaseTile
     {
-        bool IsLocked { get; set; }
-        TileType TileType { get; set; }
+        bool m_IsLocked { get; }
+        TileType m_TileType { get; }
+        Vector3 m_GridPosition { get; } 
 
-        List<IBaseTile> TopTiles { get; set; }
-        List<IBaseTile> BottomTiles { get; set; }
+        List<IBaseTile> m_TopTiles { get; }
+        List<IBaseTile> m_BottomTiles { get; }
 
         void Lock();
         void Unlock();
-
+        bool CheckParents();
+        void MoveTileToGridPosition(Vector3 gridPosition);
     }
 }

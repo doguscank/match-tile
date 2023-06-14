@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MatchTile.Tile;
 
-namespace MatchTile.Grid
+namespace MatchTile.Manager
 {
-    public class TileGrid : MonoBehaviour
+    public class TileManager : MonoBehaviour
     {
+        [SerializeField]
+        private List<IBaseTile> tiles;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -16,6 +20,11 @@ namespace MatchTile.Grid
         void Update()
         {
             
+        }
+
+        public IBaseTile GetTileById(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
