@@ -5,7 +5,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.LevelEditor
 {
-    public class LevelEditor : SingletoneBase<LevelEditor>
+    public class LevelEditorHistory : SingletoneBase<LevelEditor>
     {
         private void Awake()
         {

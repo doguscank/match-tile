@@ -22,7 +22,7 @@ namespace MatchTile.Tile
             topTiles = new List<IBaseTile>();
             bottomTiles = new List<IBaseTile>();
 
-            if (GameManager.Instance.IsDebug)
+            if (GameManager.Instance.isDebug)
             {
 
             }
@@ -76,11 +76,6 @@ namespace MatchTile.Tile
         public bool RemoveChild(IBaseTile child)
         {
             return bottomTiles.Remove(child);
-        }
-
-        public void MoveTileToGridPosition(Vector3 gridPosition)
-        {
-            throw new System.NotImplementedException();
         }
 
         public GameObject GetGameobject()

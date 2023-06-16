@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
+using MatchTile.Manager;
 using MatchTile.Utils;
 
 namespace MatchTile.LevelEditor
@@ -18,6 +21,16 @@ namespace MatchTile.LevelEditor
         }
 
         private void Update()
+        {
+            
+        }
+
+        private void OnEnable()
+        {
+
+        }
+
+        private void OnDisable()
         {
             
         }
