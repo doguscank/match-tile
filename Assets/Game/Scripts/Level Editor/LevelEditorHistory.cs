@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using MatchTile.Utils;
 
-namespace MatchTile.Manager
+namespace MatchTile.LevelEditor
 {
-    public class GameManager : SingletoneBase<GameManager>
+    public class LevelEditor : SingletoneBase<LevelEditor>
     {
-        [SerializeField]
-        public bool IsDebug { get; private set; } = false;
-        public bool IsEditor { get; private set; } = false;
-
         private void Awake()
         {
 
@@ -24,6 +20,11 @@ namespace MatchTile.Manager
         private void Update()
         {
             
+        }
+
+        public void AddAction()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

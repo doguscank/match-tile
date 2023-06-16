@@ -12,7 +12,7 @@ namespace MatchTile.Grid
 
         public int GetTileIdAt(int x, int y, int h)
         {
-            throw new System.NotImplementedException();
+            return grid[x, y, h];
         }
     }
 }

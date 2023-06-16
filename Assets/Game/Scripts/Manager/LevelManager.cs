@@ -5,12 +5,8 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
-    public class GameManager : SingletoneBase<GameManager>
+    public class LevelManager : SingletoneBase<LevelManager>
     {
-        [SerializeField]
-        public bool IsDebug { get; private set; } = false;
-        public bool IsEditor { get; private set; } = false;
-
         private void Awake()
         {
 

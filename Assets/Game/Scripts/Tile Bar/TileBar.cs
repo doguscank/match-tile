@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MatchTile.Utils;
 
 namespace MatchTile.TileBar
 {
-    public class TileBar : MonoBehaviour
+    public class TileBar : SingletoneBase<TileBar>
     {
-        // Start is called before the first frame update
+        public const int c_TileBarLength = 7;
+
         void Start()
         {
             
         }
 
-        // Update is called once per frame
         void Update()
         {
             

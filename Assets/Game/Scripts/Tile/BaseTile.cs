@@ -1,36 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MatchTile.Manager;
 
 namespace MatchTile.Tile
 {
-    public class BaseTile : IBaseTile
+    public class BaseTile : MonoBehaviour, IBaseTile
     {
-        public bool m_IsLocked { get; private set; }
-        public TileType m_TileType { get; private set; }
-        public Vector3 m_GridPosition { get; private set; }
+        // Tile properties
+        public bool isLocked { get; private set; }
+        public int tileId { get; private set; }
+        public TileType tileType { get; private set; }
+        public Vector3 gridPosition { get; private set; }
 
+        // Tile lists
+        public List<IBaseTile> topTiles { get; private set; }
+        public List<IBaseTile> bottomTiles { get; private set; }
 
-        public List<IBaseTile> m_TopTiles { get; private set; }
-        public List<IBaseTile> m_BottomTiles { get; private set; }
-
-        public BaseTile(TileType tileType, Vector3 gridPosition)
+        private void Awake()
         {
-            m_IsLocked = true;
-            m_TileType = tileType;
-            m_GridPosition = gridPosition;
-            m_TopTiles = new List<IBaseTile>();
-            m_BottomTiles = new List<IBaseTile>();
+            topTiles = new List<IBaseTile>();
+            bottomTiles = new List<IBaseTile>();
+
+            if (GameManager.Instance.IsDebug)
+            {
+
+            }
+        }
+
+        private void Update()
+        {
+
+        }
+
+        public void SetTileId(int id)
+        {
+            tileId = id;
         }
 
         public void Lock()
         {
-            m_IsLocked = true;
+            isLocked = true;
         }
 
         public void Unlock()
         {
-            m_IsLocked = false;
+            isLocked = false;
+        }
+
+        private void FindChildren()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddParent(IBaseTile parent)
+        {
+            topTiles.Add(parent);
+        }
+
+        public bool RemoveParent(IBaseTile parent)
+        {
+            return topTiles.Remove(parent);
         }
 
         public bool CheckParents()
@@ -38,9 +68,24 @@ namespace MatchTile.Tile
             throw new System.NotImplementedException();
         }
 
+        public void AddChild(IBaseTile child)
+        {
+            bottomTiles.Add(child);
+        }
+
+        public bool RemoveChild(IBaseTile child)
+        {
+            return bottomTiles.Remove(child);
+        }
+
         public void MoveTileToGridPosition(Vector3 gridPosition)
         {
             throw new System.NotImplementedException();
+        }
+
+        public GameObject GetGameobject()
+        {
+            return gameObject;
         }
     }
 }
