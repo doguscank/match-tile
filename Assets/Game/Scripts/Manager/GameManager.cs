@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
-using UnityEngine.Events;
 
 using MatchTile.Utils;
 
@@ -27,6 +24,7 @@ namespace MatchTile.Manager
             if (!isEditor)
             {
                 hitOnTile += TileManager.Instance.SelectTile;
+                InputManager.Instance.onTap += OnTap;
             }
 
             TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f));
@@ -63,20 +61,12 @@ namespace MatchTile.Manager
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                
-            }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                CheckClick();
-            }
         }
 
-        private void CheckClick()
+        private void OnTap(Vector2 clickPosition)
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(clickPosition), Vector2.zero);
             // Check if clicked on a tile
             if (hit.collider != null)
             {
