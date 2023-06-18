@@ -8,7 +8,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.LevelEditor
 {
-    public class LevelEditor : SingletoneBase<LevelEditor>
+    public class LevelEditor : SingletonBase<LevelEditor>
     {
         private void Awake()
         {

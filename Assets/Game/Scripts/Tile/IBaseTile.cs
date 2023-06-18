@@ -16,7 +16,12 @@ namespace MatchTile.Tile
 
         void Lock();
         void Unlock();
+        void SetTileId(int id);
         bool CheckParents();
-        void MoveTileToGridPosition(Vector3 gridPosition);
+        void AddParent(IBaseTile parent);
+        bool RemoveParent(IBaseTile parent);
+        void AddChild(IBaseTile child);
+        bool RemoveChild(IBaseTile child);
+        GameObject GetGameobject();
     }
 }

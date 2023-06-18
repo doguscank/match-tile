@@ -8,7 +8,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.TileBar
 {
-    public class TileBar : SingletoneBase<TileBar>
+    public class TileBar : SingletonBase<TileBar>
     {
         LinkedList<IBaseTile> tileList;
 

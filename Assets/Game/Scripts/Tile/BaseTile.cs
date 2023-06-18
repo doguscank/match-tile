@@ -38,6 +38,11 @@ namespace MatchTile.Tile
             tileId = id;
         }
 
+        public void SetTileType(TileType type)
+        {
+            tileType = type;
+        }
+
         public void Lock()
         {
             isLocked = true;
@@ -46,11 +51,6 @@ namespace MatchTile.Tile
         public void Unlock()
         {
             isLocked = false;
-        }
-
-        private void FindChildren()
-        {
-            throw new System.NotImplementedException();
         }
 
         public void AddParent(IBaseTile parent)
@@ -81,6 +81,12 @@ namespace MatchTile.Tile
         public GameObject GetGameobject()
         {
             return gameObject;
+        }
+
+        // Level editor
+        private void FindChildren()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

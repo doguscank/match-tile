@@ -5,7 +5,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
-    public class LevelManager : SingletoneBase<LevelManager>
+    public class LevelManager : SingletonBase<LevelManager>
     {
         private void Awake()
         {

@@ -9,14 +9,14 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
-    public class GameManager : SingletoneBase<GameManager>
+    public class GameManager : SingletonBase<GameManager>
     {
         [SerializeField]
         public bool isDebug { get; private set; } = false;
         public bool isEditor { get; private set; } = false;
 
-        public Action<Vector3> hitOnVoid;
-        public Action<Vector3> hitOnTile;
+        public Action<RaycastHit2D> hitOnVoid;
+        public Action<RaycastHit2D> hitOnTile;
 
         private void Awake()
         {
@@ -25,12 +25,18 @@ namespace MatchTile.Manager
 
         private void Start()
         {
-            
+            if (!isEditor)
+            {
+                hitOnTile += TileManager.Instance.SelectTile;
+            }
         }
 
         private void Update()
         {
-            
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f));
+            }
         }
 
         private void CheckClick()
@@ -40,11 +46,11 @@ namespace MatchTile.Manager
             // Check if clicked on a tile
             if (hit.collider != null)
             {
-                hitOnTile?.Invoke(inputPosition);
+                hitOnTile?.Invoke(hit);
             }
             else
             {
-                hitOnVoid?.Invoke(inputPosition);
+                hitOnVoid?.Invoke(hit);
             }
         }
     }

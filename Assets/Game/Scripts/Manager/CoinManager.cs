@@ -5,7 +5,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
-    public class CoinManager : SingletoneBase<CoinManager>
+    public class CoinManager : SingletonBase<CoinManager>
     {
         public int coin { get; private set; }
 
