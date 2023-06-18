@@ -8,7 +8,8 @@ namespace MatchTile.Tile
     public class BaseTile : MonoBehaviour, IBaseTile
     {
         // Tile properties
-        public bool isLocked { get; private set; }
+        public bool isLocked { get; private set; } = false;
+        public bool isInBar { get; private set; } = false;
         public int tileId { get; private set; }
         public TileType tileType { get; private set; }
         public Vector3 gridPosition { get; private set; }
@@ -51,6 +52,16 @@ namespace MatchTile.Tile
         public void Unlock()
         {
             isLocked = false;
+        }
+
+        public void SetMovedToBar()
+        {
+            isInBar = true;
+        }
+
+        public void SetRemovedFromBar()
+        {
+            isInBar = false;
         }
 
         public void AddParent(IBaseTile parent)

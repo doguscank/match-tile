@@ -69,21 +69,21 @@ namespace MatchTile.Manager
             }
         }
 
-        public Vector3 AddTile(IBaseTile tile)
+        public void AddTile(IBaseTile tile)
         {
             // Get tile type id
             // Add tile by sorting by tile type id
             // Get index of new tile
             int idx = InsertTile(tile);
+            tile.SetMovedToBar();
             tile.GetGameobject().GetComponent<TileMovement>().MoveToPosition(TileBarPositions.Positions7[idx]);
             // Move tiles with greated tile type id by one to right
-            MoveTilesRightFromIndex(idx);
+            // MoveTilesRightFromIndex(idx);
             // Move tile from game screen to tile bar
             // Check if 3 match exists
             // Remove tiles if match exists
             // Check if isFull
             // Game over if isFull = true
-            throw new System.NotImplementedException();
         }
 
         // Function: Move tiles to right starting from index

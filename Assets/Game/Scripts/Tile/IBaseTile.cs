@@ -7,6 +7,7 @@ namespace MatchTile.Tile
     public interface IBaseTile
     {
         bool isLocked { get; }
+        bool isInBar { get; }
         int tileId { get; }
         TileType tileType { get; }
         Vector3 gridPosition { get; } 
@@ -17,6 +18,9 @@ namespace MatchTile.Tile
         void Lock();
         void Unlock();
         void SetTileId(int id);
+        void SetTileType(TileType type);
+        void SetMovedToBar();
+        void SetRemovedFromBar();
         bool CheckParents();
         void AddParent(IBaseTile parent);
         bool RemoveParent(IBaseTile parent);

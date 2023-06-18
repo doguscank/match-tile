@@ -8,14 +8,14 @@ namespace MatchTile.Manager
 {
     public class TileManager : SingletonBase<TileManager>
     {
-        [SerializeField]
-        private List<IBaseTile> tiles;
-        [SerializeField]
-        private GameObject tilePrefab;
+        [SerializeField] private List<IBaseTile> tiles;
+        [SerializeField] private GameObject tilePrefab;
 
         void Awake()
         {
             tilePrefab = Resources.Load<GameObject>("Level/Prefabs/Tile");
+
+            tiles = new List<IBaseTile>();
         }
 
         void Start()
@@ -51,7 +51,10 @@ namespace MatchTile.Manager
         {
             GameObject tileGameObject = hit.collider.gameObject;
 
-            TileBarManager.Instance.AddTile(tileGameObject.GetComponent<BaseTile>());
+            if (!tileGameObject.GetComponent<BaseTile>().isInBar)
+            {
+                TileBarManager.Instance.AddTile(tileGameObject.GetComponent<BaseTile>());
+            }
         }
     }
 }
