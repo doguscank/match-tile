@@ -39,7 +39,7 @@ namespace MatchTile.Manager
             tiles.Add(newTile.GetComponent<BaseTile>());
 
             newTile.GetComponent<BaseTile>().SetTileId(tiles.Count);
-            newTile.GetComponent<BaseTile>().SetTileType(TileType.Tile0);
+            newTile.GetComponent<BaseTile>().SetTileType((TileType)(Random.Range(0, 3)));
         }
 
         public bool CheckTileExists(Vector3 position)

@@ -28,13 +28,44 @@ namespace MatchTile.Manager
             {
                 hitOnTile += TileManager.Instance.SelectTile;
             }
+
+            TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(3f, 0f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(6f, 0f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-3f, 0f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-6f, 0f, 0f));
+
+            TileManager.Instance.SpawnTileAt(new Vector3(0f, -3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(3f, -3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(6f, -3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-3f, -3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-6f, -3f, 0f));
+
+            TileManager.Instance.SpawnTileAt(new Vector3(0f, -6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(3f, -6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(6f, -6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-3f, -6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-6f, -6f, 0f));
+
+            TileManager.Instance.SpawnTileAt(new Vector3(0f, 3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(3f, 3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(6f, 3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-3f, 3f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-6f, 3f, 0f));
+
+            TileManager.Instance.SpawnTileAt(new Vector3(0f, 6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(3f, 6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(6f, 6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-3f, 6f, 0f));
+            TileManager.Instance.SpawnTileAt(new Vector3(-6f, 6f, 0f));
+
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
-                TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f));
+                
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -49,7 +80,6 @@ namespace MatchTile.Manager
             // Check if clicked on a tile
             if (hit.collider != null)
             {
-                Debug.Log("Collided with " + hit.collider.transform.name);
                 hitOnTile?.Invoke(hit);
             }
             else

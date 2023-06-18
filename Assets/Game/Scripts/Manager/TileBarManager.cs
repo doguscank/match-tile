@@ -65,7 +65,11 @@ namespace MatchTile.Manager
 
             for (int i = index; i < tileBarLength; i++)
             {
+                if (current == null)
+                    break;
+                
                 current.Value.GetGameobject().GetComponent<TileMovement>().MoveToPosition(TileBarPositions.Positions7[i]);
+                current = current.Next;
             }
         }
 
@@ -78,7 +82,8 @@ namespace MatchTile.Manager
             tile.SetMovedToBar();
             tile.GetGameobject().GetComponent<TileMovement>().MoveToPosition(TileBarPositions.Positions7[idx]);
             // Move tiles with greated tile type id by one to right
-            // MoveTilesRightFromIndex(idx);
+            Debug.Log("Moving from idx: " + idx.ToString());
+            MoveTilesRightFromIndex(idx);
             // Move tile from game screen to tile bar
             // Check if 3 match exists
             // Remove tiles if match exists
