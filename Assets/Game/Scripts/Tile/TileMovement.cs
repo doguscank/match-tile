@@ -19,16 +19,6 @@ namespace MatchTile.Tile
 
         }
 
-        public void MoveToTileBar()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void MoveFromTileBar()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void MoveToPosition(Vector3 position)
         {
             transform.position = position;

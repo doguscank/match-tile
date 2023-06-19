@@ -23,40 +23,32 @@ namespace MatchTile.Manager
         {
             if (!isEditor)
             {
-                hitOnTile += TileManager.Instance.SelectTile;
                 InputManager.Instance.onTap += OnTap;
             }
 
-            TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(3f, 0f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(6f, 0f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-3f, 0f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-6f, 0f, 0f));
+            // float t = 1.5f;
 
-            TileManager.Instance.SpawnTileAt(new Vector3(0f, -3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(3f, -3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(6f, -3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-3f, -3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-6f, -3f, 0f));
+            // for (int i = 0; i < 5; i++)
+            // {
+            //     for (int j = 0; j < 5; j++)
+            //     {
+            //         TileManager.Instance.SpawnTileAt(new Vector3(-t * 2 + i * t, -t * 2 + j * t, 0f));
+            //     }
+            // }
 
-            TileManager.Instance.SpawnTileAt(new Vector3(0f, -6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(3f, -6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(6f, -6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-3f, -6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-6f, -6f, 0f));
+            // for (int i = 0; i < 4; i++)
+            // {
+            //     for (int j = 0; j < 4; j++)
+            //     {
+            //         TileManager.Instance.SpawnTileAt(new Vector3(-t * 2 + 0.5f + i * t, -t * 2 + 0.5f + j * t, -1f));
+            //     }
+            // }
 
-            TileManager.Instance.SpawnTileAt(new Vector3(0f, 3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(3f, 3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(6f, 3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-3f, 3f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-6f, 3f, 0f));
-
-            TileManager.Instance.SpawnTileAt(new Vector3(0f, 6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(3f, 6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(6f, 6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-3f, 6f, 0f));
-            TileManager.Instance.SpawnTileAt(new Vector3(-6f, 6f, 0f));
-
+            var layer0_top = TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f), Tile.TileType.Tile0, new GameObject[] {});
+            var layer1_0 = TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, 0.75f, 1f), Tile.TileType.Tile1, new GameObject[] {layer0_top});
+            var layer1_1 = TileManager.Instance.SpawnTileAt(new Vector3(0.75f, 0.75f, 1f), Tile.TileType.Tile1, new GameObject[] {layer0_top});
+            var layer1_2 = TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, -0.75f, 1f), Tile.TileType.Tile2, new GameObject[] {layer0_top});
+            var layer1_3 = TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2, new GameObject[] {layer0_top});
         }
 
         private void Update()

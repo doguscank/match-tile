@@ -13,16 +13,18 @@ namespace MatchTile.Tile
         public bool isInBar { get; private set; } = false;
         public int tileId { get; private set; }
         public TileType tileType { get; private set; }
-        public Vector3 gridPosition { get; private set; }
+        public SpriteRenderer lockedTint { get; private set; }
 
         // Tile lists
-        public List<IBaseTile> topTiles { get; private set; }
-        public List<IBaseTile> bottomTiles { get; private set; }
+        public List<IBaseTile> parents { get; private set; }
+        public List<IBaseTile> children { get; private set; }
 
         private void Awake()
         {
-            topTiles = new List<IBaseTile>();
-            bottomTiles = new List<IBaseTile>();
+            parents = new List<IBaseTile>();
+            children = new List<IBaseTile>();
+
+            lockedTint = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
             if (GameManager.Instance.isDebug)
             {
@@ -32,7 +34,7 @@ namespace MatchTile.Tile
 
         private void Update()
         {
-
+            
         }
 
         public void SetTileId(int id)
@@ -55,11 +57,13 @@ namespace MatchTile.Tile
         public void Lock()
         {
             isLocked = true;
+            lockedTint.enabled = isLocked;
         }
 
         public void Unlock()
         {
             isLocked = false;
+            lockedTint.enabled = isLocked;
         }
 
         public void SetMovedToBar()
@@ -74,27 +78,33 @@ namespace MatchTile.Tile
 
         public void AddParent(IBaseTile parent)
         {
-            topTiles.Add(parent);
+            parents.Add(parent);
         }
 
         public bool RemoveParent(IBaseTile parent)
         {
-            return topTiles.Remove(parent);
+            return parents.Remove(parent);
         }
 
-        public bool CheckParents()
+        public bool CheckParentsExist()
         {
-            throw new System.NotImplementedException();
+            if (parents.Count == 0)
+            {
+                Unlock();
+                return false;
+            }
+
+            return true;
         }
 
         public void AddChild(IBaseTile child)
         {
-            bottomTiles.Add(child);
+            children.Add(child);
         }
 
         public bool RemoveChild(IBaseTile child)
         {
-            return bottomTiles.Remove(child);
+            return children.Remove(child);
         }
 
         public GameObject GetGameobject()

@@ -21,7 +21,7 @@ namespace MatchTile.Manager
 
         void Start()
         {
-            
+            GameManager.Instance.hitOnTile += SelectTile;
         }
 
         void Update()
@@ -34,25 +34,54 @@ namespace MatchTile.Manager
             return tiles.Find(x => x.tileId == id);
         }
 
-        public void SpawnTileAt(Vector3 position)
+        public GameObject SpawnTileAt(Vector3 position)
         {
             var newTile = GameObject.Instantiate(tilePrefab, position, Quaternion.identity);
             tiles.Add(newTile.GetComponent<BaseTile>());
 
-            newTile.GetComponent<BaseTile>().SetTileId(tiles.Count);
-            newTile.GetComponent<BaseTile>().SetTileType((TileType)(Random.Range(0, 3)));
+            var tileScript = newTile.GetComponent<BaseTile>();
+
+            tileScript.SetTileId(tiles.Count);
+            tileScript.SetTileType((TileType)(Random.Range(0, 3)));
+            tileScript.Lock();
+
+            return newTile;
+        }
+
+        public GameObject SpawnTileAt(Vector3 position, TileType tileType, GameObject[] parents)
+        {
+            var newTile = GameObject.Instantiate(tilePrefab, position, Quaternion.identity);
+            tiles.Add(newTile.GetComponent<BaseTile>());
+
+            var tileScript = newTile.GetComponent<BaseTile>();
+
+            tileScript.SetTileId(tiles.Count);
+            tileScript.SetTileType(tileType);
+
+            foreach (var parent in parents)
+            {
+                tileScript.AddParent(parent.GetComponent<BaseTile>());
+                parent.GetComponent<BaseTile>().AddChild(tileScript);
+            }
+
+            if (parents.Length != 0)
+            {
+                tileScript.Lock();
+            }
+
+            return newTile;
         }
 
         public bool CheckTileExists(Vector3 position)
         {
-            return tiles.Find(x => x.gridPosition == position) != null;
+            throw new System.NotImplementedException();
         }
 
         public void SelectTile(RaycastHit2D hit)
         {
             GameObject tileGameObject = hit.collider.gameObject;
 
-            if (!tileGameObject.GetComponent<BaseTile>().isInBar)
+            if (!tileGameObject.GetComponent<BaseTile>().isLocked && !tileGameObject.GetComponent<BaseTile>().isInBar)
             {
                 TileBarManager.Instance.AddTile(tileGameObject.GetComponent<BaseTile>());
             }

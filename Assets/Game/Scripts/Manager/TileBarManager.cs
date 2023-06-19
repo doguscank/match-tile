@@ -72,24 +72,94 @@ namespace MatchTile.Manager
             }
         }
 
+        public void MoveTilesLeftFromIndex(int index)
+        {
+            var current = tileList.First;
+
+            for (int i = 0; i < index; i++)
+                current = current.Next;
+
+            // 4 tiles can be moved at max (7 tiles total - 3 tiles removed = 4 tiles left)
+            for (int i = 0; i < 4; i++)
+            {                
+                if (current == null)
+                    break;
+
+                current.Value.GetGameobject().GetComponent<TileMovement>().MoveToPosition(TileBarPositions.Positions7[i + index]);
+                current = current.Next;
+            }
+        }
+
+        public bool CheckMatch(int index)
+        {
+            var current = tileList.First;
+
+            for (int i = 0; i < index - 2; i++)
+            {
+                current = current.Next;
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (current.Next == null || !current.Value.tileType.Equals(current.Next.Value.tileType))
+                {
+                    return false;
+                }
+
+                current = current.Next;
+            }
+
+            return true;
+        }
+
+        public void RemoveTiles(int index)
+        {
+            var current = tileList.First;
+
+            for (int i = 0; i < index - 2; i++)
+                current = current.Next;
+
+            for (int i = 0; i < 3; i++)
+            {
+                var temp = current.Next;
+                Destroy(current.Value.GetGameobject());
+                tileList.Remove(current);
+                current = temp;
+            }
+        }
+
         public void AddTile(IBaseTile tile)
         {
-            // Get tile type id
-            // Add tile by sorting by tile type id
-            // Get index of new tile
+            // Get where the tile is inserted
             int idx = InsertTile(tile);
+
+            foreach (var child in tile.children)
+            {
+                child.RemoveParent(tile);
+                child.CheckParentsExist();
+            }
+
+            // Set tile inserted
             tile.SetMovedToBar();
             tile.GetGameobject().GetComponent<TileMovement>().MoveToPosition(TileBarPositions.Positions7[idx]);
-            // Move tiles with greated tile type id by one to right
+            // Move tiles with greater tile type id by one to right
             Debug.Log("Moving from idx: " + idx.ToString());
             MoveTilesRightFromIndex(idx);
+
+            if (CheckMatch(idx))
+            {
+                Debug.Log("Match found!");
+
+                RemoveTiles(idx);
+                MoveTilesLeftFromIndex(idx - 2);
+            }
+
+
             // Move tile from game screen to tile bar
             // Check if 3 match exists
             // Remove tiles if match exists
             // Check if isFull
             // Game over if isFull = true
         }
-
-        // Function: Move tiles to right starting from index
     }
 }

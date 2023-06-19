@@ -10,10 +10,10 @@ namespace MatchTile.Tile
         bool isInBar { get; }
         int tileId { get; }
         TileType tileType { get; }
-        Vector3 gridPosition { get; } 
+        SpriteRenderer lockedTint { get; }
 
-        List<IBaseTile> topTiles { get; }
-        List<IBaseTile> bottomTiles { get; }
+        List<IBaseTile> parents { get; }
+        List<IBaseTile> children { get; }
 
         void Lock();
         void Unlock();
@@ -21,7 +21,7 @@ namespace MatchTile.Tile
         void SetTileType(TileType type);
         void SetMovedToBar();
         void SetRemovedFromBar();
-        bool CheckParents();
+        bool CheckParentsExist();
         void AddParent(IBaseTile parent);
         bool RemoveParent(IBaseTile parent);
         void AddChild(IBaseTile child);
