@@ -13,6 +13,7 @@ namespace MatchTile.Manager
 
         public Action<RaycastHit2D> hitOnVoid;
         public Action<RaycastHit2D> hitOnTile;
+        public Action<RaycastHit2D> hitOnPowerup;
 
         private void Awake()
         {

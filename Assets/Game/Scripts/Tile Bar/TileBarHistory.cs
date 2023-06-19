@@ -11,12 +11,16 @@ namespace MatchTile.TileBar
     {
         public LinkedList<TileBarHistoryNode> history { get; private set; }
 
+        void Awake()
+        {
+            history = new LinkedList<TileBarHistoryNode>();
+        }
+
         void Start()
         {
 
         }
 
-        // Update is called once per frame
         void Update()
         {
 

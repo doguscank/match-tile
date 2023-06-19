@@ -7,7 +7,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Powerup
 {
-    public class RemoveGridPowerup : IPowerup
+    public class RemoveGridPowerup : MonoBehaviour, IPowerup
     {
         public RemoveGridPowerup()
         {

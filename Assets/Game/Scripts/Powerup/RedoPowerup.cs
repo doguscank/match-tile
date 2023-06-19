@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using MatchTile.Tile;
+using MatchTile.TileBar;
 using MatchTile.Utils;
 
 namespace MatchTile.Powerup
 {
-    public class RedoPowerup : IPowerup
+    public class RedoPowerup : MonoBehaviour, IPowerup
     {
         public RedoPowerup()
         {
@@ -16,7 +17,9 @@ namespace MatchTile.Powerup
 
         public void Activate()
         {
-            
+            var lastMove = TileBarHistory.Instance.RedoHistory();
+
+            lastMove.tile.GetGameobject().GetComponent<TileMovement>().MoveToPosition(lastMove.originalPosition);
         }
     }
 }
