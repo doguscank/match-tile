@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MatchTile.Tile;
 using MatchTile.Utils;
 
 namespace MatchTile.TileBar
 {
-    public class TileBarHistory : MonoBehaviour
+    public class TileBarHistory : SingletonBase<TileBarHistory>
     {
-        // Start is called before the first frame update
+        public LinkedList<TileBarHistoryNode> history { get; private set; }
+
         void Start()
         {
 
@@ -18,6 +20,18 @@ namespace MatchTile.TileBar
         void Update()
         {
 
+        }
+
+        public void AddHistoryNode(IBaseTile tile, Vector3 originalPosition)
+        {
+            history.AddLast(new TileBarHistoryNode(tile, originalPosition));
+        }
+
+        public TileBarHistoryNode RedoHistory()
+        {
+            var last = history.Last;
+            history.RemoveLast();
+            return last.Value;
         }
     }
 }
