@@ -35,6 +35,11 @@ namespace MatchTile.Manager
             return tiles.Find(x => x.tileId == id);
         }
 
+        public List<IBaseTile> GetTiles()
+        {
+            return tiles;
+        }
+
         public GameObject SpawnTileAt(Vector3 position)
         {
             var newTile = GameObject.Instantiate(tilePrefab, position, Quaternion.identity);

@@ -32,6 +32,11 @@ namespace MatchTile.Tile
             }
         }
 
+        private void Start()
+        {
+            FindChildren();
+        }
+
         private void Update()
         {
             
@@ -121,7 +126,17 @@ namespace MatchTile.Tile
         // Level editor
         private void FindChildren()
         {
-            throw new System.NotImplementedException();
+            Bounds overlapBounds = new Bounds(transform.position, transform.localScale);
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(overlapBounds.center, overlapBounds.size, 0f);
+
+            foreach (var collider in colliders)
+            {
+                if (collider.gameObject.transform.position.z == transform.position.z + 1)
+                {
+                    Debug.Log("child found");
+                    AddChild(collider.gameObject.GetComponent<IBaseTile>());
+                }
+            }
         }
     }
 }
