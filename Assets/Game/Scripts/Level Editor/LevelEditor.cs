@@ -27,9 +27,12 @@ namespace MatchTile.LevelEditor
 
             InputManager.Instance.onIncreaseTileTypePush += IncreaseTileType;
             InputManager.Instance.onDecreaseTileTypePush += DecreaseTileType;
+            InputManager.Instance.onIncreaseTileTypePush += UpdateDebugTile;
+            InputManager.Instance.onDecreaseTileTypePush += UpdateDebugTile;
             InputManager.Instance.onIncreaseLayerPush += IncreaseLayer;
             InputManager.Instance.onDecreaseLayerPush += DecreaseLayer;
             InputManager.Instance.onLeftClick += OnTap;
+            InputManager.Instance.onRightClick += OnRightClick;
         }
 
         private void Start()
@@ -40,6 +43,11 @@ namespace MatchTile.LevelEditor
         private void Update()
         {
 
+        }
+
+        public void UpdateDebugTile()
+        {
+            debugTile.GetComponent<IBaseTile>().SetTileType(selectedType);
         }
 
         public void IncreaseLayer()
@@ -82,18 +90,37 @@ namespace MatchTile.LevelEditor
             return new Vector2(x, y);
         }
 
+        public bool IsInBounds(Vector2 position)
+        {
+            if (position.x >= -6 && position.x <= 6 && position.y >= -6 && position.y <= 9)
+                return true;
+
+            return false;
+        }
 
         private void OnTap(Vector2 clickPosition)
         {
             var worldPosition = Camera.main.ScreenToWorldPoint(clickPosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
 
-            if (hit.collider != null)
-                if (hit.collider.transform.position.z == layer)
-                    return;
+            if ((hit.collider != null && hit.collider.transform.position.z == layer))
+                return;            
 
             Vector2 mappedPosition = MapPosition(worldPosition, layer);
-            TileManager.Instance.SpawnTileAt(new Vector3(mappedPosition.x, mappedPosition.y, layer), selectedType);
+            if (IsInBounds(mappedPosition))
+                TileManager.Instance.SpawnTileAt(new Vector3(mappedPosition.x, mappedPosition.y, layer), selectedType);
+        }
+
+        private void OnRightClick(Vector2 clickPosition)
+        {
+            var worldPosition = Camera.main.ScreenToWorldPoint(clickPosition);
+            RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+
+            if (hit.collider != null)
+            {
+                TileManager.Instance.RemoveTile(hit.collider.gameObject.GetComponent<IBaseTile>());
+                Destroy(hit.collider.gameObject);
+            }
         }
 
         public void Undo()

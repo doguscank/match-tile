@@ -47,6 +47,11 @@ namespace MatchTile.Manager
             return tiles;
         }
 
+        public bool RemoveTile(IBaseTile tile)
+        {
+            return tiles.Remove(tile);
+        }
+
         public IBaseTile GetRandomTile()
         {
             return tiles[Random.Range(0, tiles.Count)];
