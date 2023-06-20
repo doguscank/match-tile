@@ -47,6 +47,7 @@ namespace MatchTile.Manager
 
             var tileScript = newTile.GetComponent<BaseTile>();
 
+            newTile.transform.name = tiles.Count.ToString();
             tileScript.SetTileId(tiles.Count);
             tileScript.SetTileType((TileType)(Random.Range(0, 3)));
             tileScript.Lock();
@@ -54,33 +55,26 @@ namespace MatchTile.Manager
             return newTile;
         }
 
-        public GameObject SpawnTileAt(Vector3 position, TileType tileType, GameObject[] parents)
+        public GameObject SpawnTileAt(Vector3 position, TileType tileType)
         {
             var newTile = GameObject.Instantiate(tilePrefab, position, Quaternion.identity);
             tiles.Add(newTile.GetComponent<BaseTile>());
 
             var tileScript = newTile.GetComponent<BaseTile>();
 
+            newTile.transform.name = tiles.Count.ToString();
             tileScript.SetTileId(tiles.Count);
             tileScript.SetTileType(tileType);
-
-            foreach (var parent in parents)
-            {
-                tileScript.AddParent(parent.GetComponent<BaseTile>());
-                parent.GetComponent<BaseTile>().AddChild(tileScript);
-            }
-
-            if (parents.Length != 0)
-            {
-                tileScript.Lock();
-            }
 
             return newTile;
         }
 
-        public bool CheckTileExists(Vector3 position)
+        public void UpdateTileLocks()
         {
-            throw new System.NotImplementedException();
+            foreach (var tile in tiles)
+            {
+                tile.CheckParentsExist();
+            }
         }
 
         public void SelectTile(RaycastHit2D hit)

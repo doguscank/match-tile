@@ -39,7 +39,7 @@ namespace MatchTile.Tile
 
         private void Update()
         {
-            
+
         }
 
         public void SetTileId(int id)
@@ -83,7 +83,8 @@ namespace MatchTile.Tile
 
         public void AddParent(IBaseTile parent)
         {
-            parents.Add(parent);
+            if (!parents.Contains(parent))
+                parents.Add(parent);
         }
 
         public bool RemoveParent(IBaseTile parent)
@@ -105,7 +106,8 @@ namespace MatchTile.Tile
 
         public void AddChild(IBaseTile child)
         {
-            children.Add(child);
+            if (!children.Contains(child))
+                children.Add(child);
         }
 
         public bool RemoveChild(IBaseTile child)
@@ -133,8 +135,8 @@ namespace MatchTile.Tile
             {
                 if (collider.gameObject.transform.position.z == transform.position.z + 1)
                 {
-                    Debug.Log("child found");
                     AddChild(collider.gameObject.GetComponent<IBaseTile>());
+                    collider.gameObject.GetComponent<BaseTile>().AddParent(this);
                 }
             }
         }
