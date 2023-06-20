@@ -12,12 +12,14 @@ namespace MatchTile.Manager
     {
         [SerializeField] private List<IBaseTile> tiles;
         [SerializeField] private GameObject tilePrefab;
+        
+        public GameObject tileObjectsParent { get; private set; }
 
         void Awake()
         {
-            tilePrefab = Resources.Load<GameObject>("Level/Prefabs/Tile");
-
             tiles = new List<IBaseTile>();
+            tilePrefab = Resources.Load<GameObject>("Level/Prefabs/Tile");
+            tileObjectsParent = GameObject.FindGameObjectWithTag("TilesObject");
         }
 
         void Start()
@@ -35,6 +37,11 @@ namespace MatchTile.Manager
             return tiles.Find(x => x.tileId == id);
         }
 
+        public List<IBaseTile> GetTilesByType(TileType type)
+        {
+            return tiles.FindAll(x => x.tileType == type);
+        }
+
         public List<IBaseTile> GetTiles()
         {
             return tiles;
@@ -42,17 +49,7 @@ namespace MatchTile.Manager
 
         public GameObject SpawnTileAt(Vector3 position)
         {
-            var newTile = GameObject.Instantiate(tilePrefab, position, Quaternion.identity);
-            tiles.Add(newTile.GetComponent<BaseTile>());
-
-            var tileScript = newTile.GetComponent<BaseTile>();
-
-            newTile.transform.name = tiles.Count.ToString();
-            tileScript.SetTileId(tiles.Count);
-            tileScript.SetTileType((TileType)(Random.Range(0, 3)));
-            tileScript.Lock();
-
-            return newTile;
+            return SpawnTileAt(position, (TileType)(Random.Range(0, 3)));
         }
 
         public GameObject SpawnTileAt(Vector3 position, TileType tileType)
@@ -65,6 +62,8 @@ namespace MatchTile.Manager
             newTile.transform.name = tiles.Count.ToString();
             tileScript.SetTileId(tiles.Count);
             tileScript.SetTileType(tileType);
+
+            newTile.transform.SetParent(tileObjectsParent.transform);
 
             return newTile;
         }
@@ -79,11 +78,14 @@ namespace MatchTile.Manager
 
         public void SelectTile(RaycastHit2D hit)
         {
-            GameObject tileGameObject = hit.collider.gameObject;
+            SelectTile(hit.collider.gameObject.GetComponent<BaseTile>());
+        }
 
-            if (!tileGameObject.GetComponent<BaseTile>().isLocked && !tileGameObject.GetComponent<BaseTile>().isInBar)
+        public void SelectTile(IBaseTile tile)
+        {
+            if (!tile.isLocked && !tile.isInBar)
             {
-                TileBarManager.Instance.AddTile(tileGameObject.GetComponent<BaseTile>());
+                TileBarManager.Instance.AddTile(tile);
             }
         }
     }

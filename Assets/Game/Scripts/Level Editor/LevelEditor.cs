@@ -37,7 +37,7 @@ namespace MatchTile.LevelEditor
 
         public void SaveLevel()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void Undo()

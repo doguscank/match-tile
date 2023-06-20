@@ -45,11 +45,22 @@ namespace MatchTile.Manager
             //     }
             // }
 
-            var layer0_top = TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f), Tile.TileType.Tile0);
-            var layer1_0 = TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, 0.75f, 1f), Tile.TileType.Tile1);
-            var layer1_1 = TileManager.Instance.SpawnTileAt(new Vector3(0.75f, 0.75f, 1f), Tile.TileType.Tile1);
-            var layer1_2 = TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, -0.75f, 1f), Tile.TileType.Tile2);
-            var layer1_3 = TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2);
+            TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f), Tile.TileType.Tile0);
+
+            TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, 0.75f, 1f), Tile.TileType.Tile1);
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, 0.75f, 1f), Tile.TileType.Tile1);
+            TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, -0.75f, 1f), Tile.TileType.Tile2);
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2);
+
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile0);
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile2);
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile2);
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile1);
+
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile0);
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile2);
+            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2);
+
         }
 
         private void Update()

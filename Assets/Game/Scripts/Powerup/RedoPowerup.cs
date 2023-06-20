@@ -16,16 +16,6 @@ namespace MatchTile.Powerup
         public bool isLocked { get; private set; }
         public bool isEnabled => TileBarManager.Instance.history.history.Count != 0;
 
-        private void Awake()
-        {
-
-        }
-
-        private void Update()
-        {
-
-        }
-
         public void SetLocked(bool isLocked)
         {
             this.isLocked = isLocked;

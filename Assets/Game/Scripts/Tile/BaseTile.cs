@@ -85,11 +85,16 @@ namespace MatchTile.Tile
         {
             if (!parents.Contains(parent))
                 parents.Add(parent);
+
+            Lock();
         }
 
         public bool RemoveParent(IBaseTile parent)
         {
-            return parents.Remove(parent);
+            bool result = parents.Remove(parent);
+            CheckParentsExist();
+
+            return result;
         }
 
         public bool CheckParentsExist()

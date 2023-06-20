@@ -4,7 +4,7 @@ using UnityEngine;
 using MatchTile.Tile;
 
 [CustomEditor(typeof(BaseTile))]
-public class BaseTileEditor : Editor
+public class TileEditor : Editor
 {
     public override void OnInspectorGUI()
     {
