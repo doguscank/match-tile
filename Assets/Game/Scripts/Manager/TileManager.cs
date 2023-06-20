@@ -84,7 +84,6 @@ namespace MatchTile.Manager
 
             if (!tileGameObject.GetComponent<BaseTile>().isLocked && !tileGameObject.GetComponent<BaseTile>().isInBar)
             {
-                TileBarHistory.Instance.AddHistoryNode(tileGameObject.GetComponent<BaseTile>(), tileGameObject.transform.position);
                 TileBarManager.Instance.AddTile(tileGameObject.GetComponent<BaseTile>());
             }
         }

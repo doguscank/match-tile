@@ -16,8 +16,8 @@ namespace MatchTile.Tile
         public SpriteRenderer lockedTint { get; private set; }
 
         // Tile lists
-        public List<IBaseTile> parents { get; private set; }
-        public List<IBaseTile> children { get; private set; }
+        [SerializeField] public List<IBaseTile> parents { get; private set; }
+        [SerializeField] public List<IBaseTile> children { get; private set; }
 
         private void Awake()
         {
@@ -94,6 +94,7 @@ namespace MatchTile.Tile
                 return false;
             }
 
+            Lock();
             return true;
         }
 
@@ -110,6 +111,11 @@ namespace MatchTile.Tile
         public GameObject GetGameobject()
         {
             return gameObject;
+        }
+
+        public Vector3 GetPosition()
+        {
+            return transform.position;
         }
 
         // Level editor

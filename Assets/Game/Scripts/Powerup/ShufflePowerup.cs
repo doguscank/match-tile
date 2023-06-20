@@ -7,7 +7,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Powerup
 {
-    public class ShufflePowerup : MonoBehaviour, IPowerup
+    public class ShufflePowerup : SingletonBase<ShufflePowerup>, IPowerup
     {
         public ShufflePowerup()
         {

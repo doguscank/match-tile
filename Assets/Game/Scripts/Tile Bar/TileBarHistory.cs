@@ -1,41 +1,68 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using MatchTile.Powerup;
 using MatchTile.Tile;
 using MatchTile.Utils;
 
 namespace MatchTile.TileBar
 {
-    public class TileBarHistory : SingletonBase<TileBarHistory>
+    public class TileBarHistory
     {
         public LinkedList<TileBarHistoryNode> history { get; private set; }
 
-        void Awake()
+        public TileBarHistory()
         {
             history = new LinkedList<TileBarHistoryNode>();
         }
 
-        void Start()
+        public void AddHistoryNode(IBaseTile tile)
         {
-
+            history.AddLast(new TileBarHistoryNode(tile));
         }
 
-        void Update()
+        private TileBarHistoryNode FindMatchingNodeByTile(IBaseTile tile)
         {
+            var current = history.First;
 
+            while (current != null && current.Value.tile != tile)
+            {
+                current = current.Next;
+            }
+
+            return current.Value;
         }
 
-        public void AddHistoryNode(IBaseTile tile, Vector3 originalPosition)
+        public bool RemoveHistoryNodeByTile(IBaseTile tile)
         {
-            history.AddLast(new TileBarHistoryNode(tile, originalPosition));
+            var match = FindMatchingNodeByTile(tile);
+
+            if (match != null)
+            {
+                history.Remove(match);
+                return true;
+            }
+
+            return false;
         }
 
-        public TileBarHistoryNode RedoHistory()
+        public TileBarHistoryNode Redo()
         {
-            var last = history.Last;
-            history.RemoveLast();
-            return last.Value;
+            if (history.Count != 0)
+            {
+                var temp = history.Last.Value;
+                history.RemoveLast();
+                return temp;
+            }
+
+            return null;
+        }
+
+        public void Reset()
+        {
+            history = new LinkedList<TileBarHistoryNode>();
         }
     }
 }

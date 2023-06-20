@@ -27,5 +27,6 @@ namespace MatchTile.Tile
         void AddChild(IBaseTile child);
         bool RemoveChild(IBaseTile child);
         GameObject GetGameobject();
+        Vector3 GetPosition();
     }
 }

@@ -10,15 +10,17 @@ namespace MatchTile.Manager
 {
     public class TileBarManager : SingletonBase<TileBarManager>
     {
-        LinkedList<IBaseTile> tileList;
-
+        public LinkedList<IBaseTile> tileList { get; private set; }
+        public TileBarHistory history { get; private set; }
         public int tileBarLength { get; private set; } = 7;
+
         public int numberOfTiles => tileList.Count;
         public bool isFull => numberOfTiles == tileBarLength;
 
         void Awake()
         {
             tileList = new LinkedList<IBaseTile>();
+            history = new TileBarHistory();
         }
 
         void Start()
@@ -112,7 +114,7 @@ namespace MatchTile.Manager
             return true;
         }
 
-        public void RemoveTiles(int index)
+        public void RemoveMatchedTiles(int index)
         {
             var current = tileList.First;
 
@@ -130,6 +132,8 @@ namespace MatchTile.Manager
 
         public void AddTile(IBaseTile tile)
         {
+            history.AddHistoryNode(tile);
+            
             // Get where the tile is inserted
             int idx = InsertTile(tile);
 
@@ -150,16 +154,50 @@ namespace MatchTile.Manager
             {
                 Debug.Log("Match found!");
 
-                RemoveTiles(idx);
+                history.Reset();
+
+                RemoveMatchedTiles(idx);
                 MoveTilesLeftFromIndex(idx - 2);
             }
-
 
             // Move tile from game screen to tile bar
             // Check if 3 match exists
             // Remove tiles if match exists
             // Check if isFull
             // Game over if isFull = true
+        }
+
+        private int RemoveTile(IBaseTile tile)
+        {
+            int idx = 0;
+            var current = tileList.First;
+
+            while (current != null && current.Value != tile)
+            {
+                idx ++;
+                current = current.Next;
+            }
+
+            return idx;
+        }
+
+        public void Redo()
+        {
+            // Remove from history and tile list
+            var lastMove = history.Redo();
+            int index = RemoveTile(lastMove.tile);
+            tileList.Remove(lastMove.tile);
+            MoveTilesLeftFromIndex(index);
+
+            lastMove.tile.SetRemovedFromBar();
+
+            foreach (var child in lastMove.tile.children)
+            {
+                child.AddParent(lastMove.tile);
+                child.CheckParentsExist();
+            }
+
+            lastMove.tile.GetGameobject().GetComponent<TileMovement>().MoveToPosition(lastMove.originalPosition);
         }
     }
 }

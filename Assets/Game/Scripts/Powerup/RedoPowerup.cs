@@ -1,25 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
+using MatchTile.Manager;
 using MatchTile.Tile;
 using MatchTile.TileBar;
 using MatchTile.Utils;
 
 namespace MatchTile.Powerup
 {
-    public class RedoPowerup : MonoBehaviour, IPowerup
+    public class RedoPowerup : SingletonBase<RedoPowerup>, IPowerup
     {
-        public RedoPowerup()
+        public bool isEnabled => TileBarManager.Instance.history.history.Count != 0;
+
+        private void Awake()
+        {
+
+        }
+
+        private void Update()
         {
 
         }
 
         public void Activate()
         {
-            var lastMove = TileBarHistory.Instance.RedoHistory();
+            Debug.Log("Activated redo");
 
-            lastMove.tile.GetGameobject().GetComponent<TileMovement>().MoveToPosition(lastMove.originalPosition);
+            if (isEnabled)
+            {
+                TileBarManager.Instance.Redo();
+            }
         }
     }
 }
