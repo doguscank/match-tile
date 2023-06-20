@@ -11,7 +11,10 @@ namespace MatchTile.Manager
     {
         public Action<Vector2> onLeftClick;
         public Action<Vector2> onRightClick;
-        public Action<KeyCode> onKeyboardKeyPressed;
+        public Action onIncreaseTileTypePush;
+        public Action onDecreaseTileTypePush;
+        public Action onIncreaseLayerPush;
+        public Action onDecreaseLayerPush;
 
         private TouchControls touchControls;
         private MouseControls mouseControls;
@@ -28,7 +31,10 @@ namespace MatchTile.Manager
             mouseControls.Mouse.RightClick.started += ctx => onRightClick?.Invoke(Mouse.current.position.ReadValue());
 
 #if UNITY_EDITOR
-            keyboardControls.Keyboard.KeyPressed.started += ctx => onKeyboardKeyPressed?.Invoke(ctx.ReadValue<KeyCode>());
+            keyboardControls.Keyboard.IncreaseTileType.performed += ctx => onIncreaseTileTypePush?.Invoke();
+            keyboardControls.Keyboard.DecreaseTileType.performed += ctx => onDecreaseTileTypePush?.Invoke();
+            keyboardControls.Keyboard.IncreaseLayer.performed += ctx => onIncreaseLayerPush?.Invoke();
+            keyboardControls.Keyboard.DecreaseLayer.performed += ctx => onDecreaseLayerPush?.Invoke();
 #endif
         }
 
@@ -36,12 +42,14 @@ namespace MatchTile.Manager
         {
             touchControls.Enable();
             mouseControls.Enable();
+            keyboardControls.Enable();
         }
 
         private void OnDisable()
         {
             touchControls.Disable();
             mouseControls.Disable();
+            keyboardControls.Disable();
         }
     }
 }

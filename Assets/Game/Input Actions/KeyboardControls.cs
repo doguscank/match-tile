@@ -28,9 +28,36 @@ public partial class @KeyboardControls : IInputActionCollection2, IDisposable
             ""id"": ""cc5b18c0-ec84-4577-9d5e-bb05f5b6d2f2"",
             ""actions"": [
                 {
-                    ""name"": ""KeyPressed"",
-                    ""type"": ""Button"",
+                    ""name"": ""IncreaseTileType"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""55129892-56bc-4f62-95b9-775e071cc37e"",
+                    ""expectedControlType"": ""Key"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DecreaseTileType"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7bbb8f9-aa7c-468d-a61a-cccf3763a3a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseLayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""bded19ba-5641-4a9c-9dd0-1f84c6ab93b0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DecreaseLayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""e612cda1-8720-415d-aafe-f0ae37aef02c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -40,111 +67,45 @@ public partial class @KeyboardControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""571d4a8f-9217-4170-a398-4e58168d0757"",
-                    ""path"": ""<Keyboard>/0"",
+                    ""id"": ""1b4caf36-28ea-469e-9fab-7d344ff01515"",
+                    ""path"": ""<Keyboard>/#(0)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""KeyPressed"",
+                    ""action"": ""IncreaseTileType"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""15eb3aca-1d15-46cd-bf37-5a052256b7e1"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""id"": ""5523a06b-fcd2-4a55-a15d-2dd0ae5eed85"",
+                    ""path"": ""<Keyboard>/#(9)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""KeyPressed"",
+                    ""action"": ""DecreaseTileType"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5e1ef5bd-c2a5-4f06-8340-a41c900d528e"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""id"": ""050391ab-54e5-4d83-839f-91c2f36cbb01"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""KeyPressed"",
+                    ""action"": ""IncreaseLayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""af484298-0699-4cf8-8e7a-40850cc9c609"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""id"": ""1ecea450-9b55-49e8-93e3-f5ab241d1149"",
+                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""KeyPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""dd917775-fcfd-4468-9920-44d4dc415b84"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""KeyPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9188bcb6-4446-4ebf-8af9-f0b4ed63b6e6"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""KeyPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""04146121-4eca-41d0-b20a-b77a32b1f503"",
-                    ""path"": ""<Keyboard>/6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""KeyPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""37724c08-abff-4bc2-bd78-497afc54877a"",
-                    ""path"": ""<Keyboard>/7"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""KeyPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0ac0c329-18cd-4bca-ac85-cd9eeec2dbdb"",
-                    ""path"": ""<Keyboard>/8"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""KeyPressed"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7ee45462-8a16-4bca-af8f-f200dbae92d4"",
-                    ""path"": ""<Keyboard>/9"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""KeyPressed"",
+                    ""action"": ""DecreaseLayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -155,7 +116,10 @@ public partial class @KeyboardControls : IInputActionCollection2, IDisposable
 }");
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
-        m_Keyboard_KeyPressed = m_Keyboard.FindAction("KeyPressed", throwIfNotFound: true);
+        m_Keyboard_IncreaseTileType = m_Keyboard.FindAction("IncreaseTileType", throwIfNotFound: true);
+        m_Keyboard_DecreaseTileType = m_Keyboard.FindAction("DecreaseTileType", throwIfNotFound: true);
+        m_Keyboard_IncreaseLayer = m_Keyboard.FindAction("IncreaseLayer", throwIfNotFound: true);
+        m_Keyboard_DecreaseLayer = m_Keyboard.FindAction("DecreaseLayer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -215,12 +179,18 @@ public partial class @KeyboardControls : IInputActionCollection2, IDisposable
     // Keyboard
     private readonly InputActionMap m_Keyboard;
     private IKeyboardActions m_KeyboardActionsCallbackInterface;
-    private readonly InputAction m_Keyboard_KeyPressed;
+    private readonly InputAction m_Keyboard_IncreaseTileType;
+    private readonly InputAction m_Keyboard_DecreaseTileType;
+    private readonly InputAction m_Keyboard_IncreaseLayer;
+    private readonly InputAction m_Keyboard_DecreaseLayer;
     public struct KeyboardActions
     {
         private @KeyboardControls m_Wrapper;
         public KeyboardActions(@KeyboardControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @KeyPressed => m_Wrapper.m_Keyboard_KeyPressed;
+        public InputAction @IncreaseTileType => m_Wrapper.m_Keyboard_IncreaseTileType;
+        public InputAction @DecreaseTileType => m_Wrapper.m_Keyboard_DecreaseTileType;
+        public InputAction @IncreaseLayer => m_Wrapper.m_Keyboard_IncreaseLayer;
+        public InputAction @DecreaseLayer => m_Wrapper.m_Keyboard_DecreaseLayer;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -230,22 +200,43 @@ public partial class @KeyboardControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
             {
-                @KeyPressed.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnKeyPressed;
-                @KeyPressed.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnKeyPressed;
-                @KeyPressed.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnKeyPressed;
+                @IncreaseTileType.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIncreaseTileType;
+                @IncreaseTileType.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIncreaseTileType;
+                @IncreaseTileType.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIncreaseTileType;
+                @DecreaseTileType.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDecreaseTileType;
+                @DecreaseTileType.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDecreaseTileType;
+                @DecreaseTileType.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDecreaseTileType;
+                @IncreaseLayer.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIncreaseLayer;
+                @IncreaseLayer.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIncreaseLayer;
+                @IncreaseLayer.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnIncreaseLayer;
+                @DecreaseLayer.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDecreaseLayer;
+                @DecreaseLayer.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDecreaseLayer;
+                @DecreaseLayer.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDecreaseLayer;
             }
             m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @KeyPressed.started += instance.OnKeyPressed;
-                @KeyPressed.performed += instance.OnKeyPressed;
-                @KeyPressed.canceled += instance.OnKeyPressed;
+                @IncreaseTileType.started += instance.OnIncreaseTileType;
+                @IncreaseTileType.performed += instance.OnIncreaseTileType;
+                @IncreaseTileType.canceled += instance.OnIncreaseTileType;
+                @DecreaseTileType.started += instance.OnDecreaseTileType;
+                @DecreaseTileType.performed += instance.OnDecreaseTileType;
+                @DecreaseTileType.canceled += instance.OnDecreaseTileType;
+                @IncreaseLayer.started += instance.OnIncreaseLayer;
+                @IncreaseLayer.performed += instance.OnIncreaseLayer;
+                @IncreaseLayer.canceled += instance.OnIncreaseLayer;
+                @DecreaseLayer.started += instance.OnDecreaseLayer;
+                @DecreaseLayer.performed += instance.OnDecreaseLayer;
+                @DecreaseLayer.canceled += instance.OnDecreaseLayer;
             }
         }
     }
     public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface IKeyboardActions
     {
-        void OnKeyPressed(InputAction.CallbackContext context);
+        void OnIncreaseTileType(InputAction.CallbackContext context);
+        void OnDecreaseTileType(InputAction.CallbackContext context);
+        void OnIncreaseLayer(InputAction.CallbackContext context);
+        void OnDecreaseLayer(InputAction.CallbackContext context);
     }
 }

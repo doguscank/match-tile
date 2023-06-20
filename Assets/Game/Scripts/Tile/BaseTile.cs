@@ -46,12 +46,7 @@ namespace MatchTile.Tile
         {
             tileType = type;
 
-            Color[] colors = new Color[3];
-            colors[0] = Color.red;
-            colors[1] = Color.green;
-            colors[2] = Color.blue;
-
-            GetComponent<SpriteRenderer>().color = colors[(int)type];
+            GetComponent<SpriteRenderer>().color = TileColors.colors[(int)type];
         }
 
         public void Lock()
