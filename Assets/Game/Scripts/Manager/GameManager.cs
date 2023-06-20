@@ -54,6 +54,7 @@ namespace MatchTile.Manager
             // Check if clicked on a tile
             if (hit.collider != null)
             {
+                Handheld.Vibrate();
                 hitOnTile?.Invoke(hit);
             }
             else
