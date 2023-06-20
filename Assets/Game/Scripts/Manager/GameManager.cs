@@ -8,9 +8,6 @@ namespace MatchTile.Manager
 {
     public class GameManager : SingletonBase<GameManager>
     {
-        public bool isDebug { get; private set; } = false;
-        public bool isEditor { get; private set; } = false;
-
         public Action<RaycastHit2D> hitOnVoid;
         public Action<RaycastHit2D> hitOnTile;
         public Action<RaycastHit2D> hitOnPowerup;
@@ -22,44 +19,27 @@ namespace MatchTile.Manager
 
         private void Start()
         {
-            if (!isEditor)
-            {
-                InputManager.Instance.onLeftClick += OnTap;
-            }
+#if UNITY_EDITOR
+            GameObject.Find("Canvas").transform.Find("SaveLevelButton").gameObject.SetActive(true);
+#else
+            GameObject.Find("DebugTile").SetActive(false);
+            InputManager.Instance.onLeftClick += OnTap;
+#endif
 
-            // float t = 1.5f;
+            // TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f), Tile.TileType.Tile0);
 
-            // for (int i = 0; i < 5; i++)
-            // {
-            //     for (int j = 0; j < 5; j++)
-            //     {
-            //         TileManager.Instance.SpawnTileAt(new Vector3(-t * 2 + i * t, -t * 2 + j * t, 0f));
-            //     }
-            // }
+            // TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, 0.75f, 1f), Tile.TileType.Tile1);
+            // TileManager.Instance.SpawnTileAt(new Vector3(0.75f, 0.75f, 1f), Tile.TileType.Tile1);
+            // TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, -0.75f, 1f), Tile.TileType.Tile2);
+            // TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2);
 
-            // for (int i = 0; i < 4; i++)
-            // {
-            //     for (int j = 0; j < 4; j++)
-            //     {
-            //         TileManager.Instance.SpawnTileAt(new Vector3(-t * 2 + 0.5f + i * t, -t * 2 + 0.5f + j * t, -1f));
-            //     }
-            // }
-
-            TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f), Tile.TileType.Tile0);
-
-            TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, 0.75f, 1f), Tile.TileType.Tile1);
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, 0.75f, 1f), Tile.TileType.Tile1);
-            TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, -0.75f, 1f), Tile.TileType.Tile2);
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2);
-
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile0);
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile2);
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile2);
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile1);
-
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile0);
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 2f), Tile.TileType.Tile2);
-            TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2);
+            // TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 2f), Tile.TileType.Tile0);
+            // TileManager.Instance.SpawnTileAt(new Vector3(1.5f, -1.5f, 2f), Tile.TileType.Tile2);
+            // TileManager.Instance.SpawnTileAt(new Vector3(1.5f, 1.5f, 2f), Tile.TileType.Tile0);
+            // TileManager.Instance.SpawnTileAt(new Vector3(-1.5f, -1.5f, 2f), Tile.TileType.Tile1);
+            // TileManager.Instance.SpawnTileAt(new Vector3(-1.5f, 1.5f, 2f), Tile.TileType.Tile1);
+            // TileManager.Instance.SpawnTileAt(new Vector3(0f, -1.5f, 2f), Tile.TileType.Tile1);
+            // TileManager.Instance.SpawnTileAt(new Vector3(0f, 1.5f, 2f), Tile.TileType.Tile1);
 
         }
 

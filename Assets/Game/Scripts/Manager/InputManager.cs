@@ -11,18 +11,25 @@ namespace MatchTile.Manager
     {
         public Action<Vector2> onLeftClick;
         public Action<Vector2> onRightClick;
+        public Action<KeyCode> onKeyboardKeyPressed;
 
         private TouchControls touchControls;
         private MouseControls mouseControls;
+        private KeyboardControls keyboardControls;
 
         private void Awake()
         {
             touchControls = new TouchControls();
             mouseControls = new MouseControls();
+            keyboardControls = new KeyboardControls();
 
             touchControls.Touch.PrimaryContact.started += ctx => onLeftClick?.Invoke(ctx.ReadValue<Vector2>());
             mouseControls.Mouse.LeftClick.started += ctx => onLeftClick?.Invoke(Mouse.current.position.ReadValue());
             mouseControls.Mouse.RightClick.started += ctx => onRightClick?.Invoke(Mouse.current.position.ReadValue());
+
+#if UNITY_EDITOR
+            keyboardControls.Keyboard.KeyPressed.started += ctx => onKeyboardKeyPressed?.Invoke(ctx.ReadValue<KeyCode>());
+#endif
         }
 
         private void OnEnable()

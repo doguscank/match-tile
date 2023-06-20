@@ -47,6 +47,11 @@ namespace MatchTile.Manager
             return tiles;
         }
 
+        public IBaseTile GetRandomTile()
+        {
+            return tiles[Random.Range(0, tiles.Count)];
+        }
+
         public GameObject SpawnTileAt(Vector3 position)
         {
             return SpawnTileAt(position, (TileType)(Random.Range(0, 3)));

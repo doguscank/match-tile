@@ -25,11 +25,6 @@ namespace MatchTile.Tile
             children = new List<IBaseTile>();
 
             lockedTint = transform.GetChild(0).GetComponent<SpriteRenderer>();
-
-            if (GameManager.Instance.isDebug)
-            {
-
-            }
         }
 
         private void Start()

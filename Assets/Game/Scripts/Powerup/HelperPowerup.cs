@@ -24,12 +24,12 @@ namespace MatchTile.Powerup
 
         public void Activate()
         {
-            int maxValue = (int)Enum.GetValues(typeof(TileType)).Cast<TileType>().Max();
-            TileType randomType = (TileType)(Random.Range(0, maxValue));
+            TileType randomType = TileManager.Instance.GetRandomTile().tileType;
             List<IBaseTile> tiles = TileManager.Instance.GetTilesByType(randomType);
 
             foreach (IBaseTile tile in tiles.OrderBy(_ => Guid.NewGuid()).ToList().Take(3))
             {
+                tile.Unlock();
                 TileManager.Instance.SelectTile(tile);
             }
         }

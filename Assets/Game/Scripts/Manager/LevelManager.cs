@@ -11,11 +11,11 @@ namespace MatchTile.Manager
 {
     public class LevelManager : SingletonBase<LevelManager>
     {
-        public List<LevelDatum> levelData { get; private set; }
+        public LevelData allLevelsData { get; private set; }
 
         private void Awake()
         {
-            levelData = new List<LevelDatum>();
+            LoadLevels();
         }
 
         private void Start()
@@ -28,12 +28,19 @@ namespace MatchTile.Manager
             
         }
 
+        public void ResetLevel()
+        {
+            
+        }
+
         public void LoadLevel(int levelId)
         {
-            if (levelId >= levelData.Count)
+            ResetLevel();
+
+            if (levelId >= allLevelsData.levelData.Count)
                 throw new System.IndexOutOfRangeException($"Level with Id {levelId} is not available!");
 
-            var level = levelData[levelId];
+            var level = allLevelsData.levelData[levelId];
 
             foreach (var tileData in level.tileData)
             {
@@ -43,13 +50,21 @@ namespace MatchTile.Manager
 
         public void LoadLevels()
         {
-            throw new System.NotImplementedException();
+            TextAsset levelsJson = Resources.Load<TextAsset>("Level/Levels");
+
+            if (levelsJson != null)
+            {
+                allLevelsData = JsonUtility.FromJson<LevelData>(levelsJson.text);
+            }
+            else
+            {
+                allLevelsData = new LevelData(new List<LevelDatum>());
+            }
         }
 
         public void SaveLevel()
         {
-            if (!GameManager.Instance.isEditor) return;
-
+#if UNITY_EDITOR
             List<TileDatum> tileData = new List<TileDatum>();
 
             foreach (IBaseTile tile in TileManager.Instance.GetTiles())
@@ -57,7 +72,12 @@ namespace MatchTile.Manager
                 tileData.Add(new TileDatum(tile.GetPosition(), tile.tileType));
             }
 
-            LevelDatum level = new LevelDatum(levelData.Count, tileData);
+            LevelDatum level = new LevelDatum(allLevelsData.levelData.Count, tileData);
+            allLevelsData.levelData.Add(level);
+
+            string json = JsonUtility.ToJson(allLevelsData);
+            System.IO.File.WriteAllText(Application.dataPath + "/Resources/Level/Levels.json", json);
+#endif
         }
     }
 }
