@@ -16,8 +16,8 @@ namespace MatchTile.Tile
         public SpriteRenderer lockedTint { get; private set; }
 
         // Tile lists
-        [SerializeField] public List<IBaseTile> parents { get; private set; }
-        [SerializeField] public List<IBaseTile> children { get; private set; }
+        public List<IBaseTile> parents { get; private set; }
+        public List<IBaseTile> children { get; private set; }
 
         private void Awake()
         {

@@ -8,8 +8,8 @@ namespace MatchTile.Manager
 {
     public class GameManager : SingletonBase<GameManager>
     {
-        [SerializeField] public bool isDebug { get; private set; } = false;
-        [SerializeField] public bool isEditor { get; private set; } = false;
+        public bool isDebug { get; private set; } = false;
+        public bool isEditor { get; private set; } = false;
 
         public Action<RaycastHit2D> hitOnVoid;
         public Action<RaycastHit2D> hitOnTile;
