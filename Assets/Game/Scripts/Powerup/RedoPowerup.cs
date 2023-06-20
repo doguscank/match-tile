@@ -13,6 +13,7 @@ namespace MatchTile.Powerup
 {
     public class RedoPowerup : SingletonBase<RedoPowerup>, IPowerup
     {
+        public bool isLocked { get; private set; }
         public bool isEnabled => TileBarManager.Instance.history.history.Count != 0;
 
         private void Awake()
@@ -25,11 +26,16 @@ namespace MatchTile.Powerup
 
         }
 
+        public void SetLocked(bool isLocked)
+        {
+            this.isLocked = isLocked;
+        }
+
         public void Activate()
         {
             Debug.Log("Activated redo");
 
-            if (isEnabled)
+            if (!isLocked && isEnabled)
             {
                 TileBarManager.Instance.Redo();
             }
