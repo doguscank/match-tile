@@ -33,7 +33,7 @@ namespace MatchTile.Powerup
         {
             if (!isLocked)
             {
-                List<IBaseTile> tiles = TileManager.Instance.GetTiles();
+                List<BaseTile> tiles = TileManager.Instance.GetTiles();
                 List<TileType> tileTypes = tiles.Select(tile => tile.tileType).OrderBy(_ => Guid.NewGuid()).ToList();
 
                 for (int i = 0; i < tiles.Count; i++)

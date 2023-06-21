@@ -21,7 +21,7 @@ namespace MatchTile.LevelEditor
             {
                 debugTile = GameObject.Find("DebugTile");
 
-                debugTile.GetComponent<IBaseTile>().SetTileType(TileType.Tile0);
+                debugTile.GetComponent<BaseTile>().SetTileType(TileType.Tile0);
 
                 InputManager.Instance.onIncreaseTileTypePush += IncreaseTileType;
                 InputManager.Instance.onDecreaseTileTypePush += DecreaseTileType;
@@ -48,7 +48,7 @@ namespace MatchTile.LevelEditor
 
         public void UpdateDebugTile()
         {
-            debugTile.GetComponent<IBaseTile>().SetTileType(selectedType);
+            debugTile.GetComponent<BaseTile>().SetTileType(selectedType);
         }
 
         public void IncreaseLayer()
@@ -119,8 +119,8 @@ namespace MatchTile.LevelEditor
 
             if (hit.collider != null)
             {
-                TileManager.Instance.RemoveTile(hit.collider.gameObject.GetComponent<IBaseTile>());
-                hit.collider.gameObject.GetComponent<IBaseTile>().SetDestroyed();
+                TileManager.Instance.RemoveTile(hit.collider.gameObject.GetComponent<BaseTile>());
+                hit.collider.gameObject.GetComponent<BaseTile>().SetDestroyed();
                 Destroy(hit.collider.gameObject);
             }
         }

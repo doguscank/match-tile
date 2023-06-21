@@ -9,10 +9,10 @@ namespace MatchTile.TileBar
 {
     public class TileBarHistoryNode
     {
-        public IBaseTile tile;
+        public BaseTile tile;
         public Vector3 originalPosition;
 
-        public TileBarHistoryNode(IBaseTile tile)
+        public TileBarHistoryNode(BaseTile tile)
         {
             this.tile = tile;
             originalPosition = tile.GetPosition();

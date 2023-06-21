@@ -113,7 +113,7 @@ namespace MatchTile.Manager
         {
             List<TileDatum> tileData = new List<TileDatum>();
 
-            foreach (IBaseTile tile in TileManager.Instance.GetTiles())
+            foreach (BaseTile tile in TileManager.Instance.GetTiles())
             {
                 tileData.Add(new TileDatum(tile.GetPosition(), tile.tileType));
             }

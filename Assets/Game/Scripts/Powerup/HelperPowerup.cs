@@ -38,7 +38,7 @@ namespace MatchTile.Powerup
                 {
                     TileType type = TileBarManager.Instance.tileList.First.Value.tileType;
 
-                    foreach (IBaseTile tile in TileManager.Instance.GetTilesByTypeFromGrid(type).OrderBy(_ => Guid.NewGuid()).ToList().Take(3))
+                    foreach (BaseTile tile in TileManager.Instance.GetTilesByTypeFromGrid(type).OrderBy(_ => Guid.NewGuid()).ToList().Take(3))
                     {
                         tile.Unlock();
                         TileManager.Instance.SelectTile(tile);
@@ -48,7 +48,7 @@ namespace MatchTile.Powerup
                 }
 
                 TileType randomType = TileManager.Instance.GetRandomTileFromGrid().tileType;
-                List<IBaseTile> tiles = TileManager.Instance.GetTilesByTypeFromGrid(randomType);
+                List<BaseTile> tiles = TileManager.Instance.GetTilesByTypeFromGrid(randomType);
 
                 while (tiles.Count < 3)
                 {
@@ -56,7 +56,7 @@ namespace MatchTile.Powerup
                     tiles = TileManager.Instance.GetTilesByTypeFromGrid(randomType);
                 }
 
-                foreach (IBaseTile tile in tiles.OrderBy(_ => Guid.NewGuid()).ToList().Take(3))
+                foreach (BaseTile tile in tiles.OrderBy(_ => Guid.NewGuid()).ToList().Take(3))
                 {
                     tile.Unlock();
                     TileManager.Instance.SelectTile(tile);

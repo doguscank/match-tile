@@ -12,7 +12,7 @@ namespace MatchTile.Manager
     [DefaultExecutionOrder(-15)]
     public class TileManager : SingletonBase<TileManager>
     {
-        [SerializeField] private List<IBaseTile> tiles;
+        [SerializeField] private List<BaseTile> tiles;
         [SerializeField] private GameObject tilePrefab;
         public int numTiles => tiles.Count;
         
@@ -22,7 +22,7 @@ namespace MatchTile.Manager
         {
             tilePrefab = Resources.Load<GameObject>("Level/Prefabs/Tile");
 
-            tiles = new List<IBaseTile>();
+            tiles = new List<BaseTile>();
             tileObjectsParent = GameObject.FindGameObjectWithTag("TilesObject");
             
             GameManager.Instance.hitOnTile += SelectTile;
@@ -51,37 +51,37 @@ namespace MatchTile.Manager
             tiles.Clear();
         }
 
-        public IBaseTile GetTileById(int id)
+        public BaseTile GetTileById(int id)
         {
             return tiles.Find(x => x.tileId == id);
         }
 
-        public List<IBaseTile> GetTilesByType(TileType type)
+        public List<BaseTile> GetTilesByType(TileType type)
         {
             return tiles.FindAll(x => x.tileType == type);
         }
 
-        public List<IBaseTile> GetTilesByTypeFromGrid(TileType type)
+        public List<BaseTile> GetTilesByTypeFromGrid(TileType type)
         {
             return tiles.FindAll(x => x.tileType == type && !x.isInBar);
         }
 
-        public List<IBaseTile> GetTiles()
+        public List<BaseTile> GetTiles()
         {
             return tiles;
         }
 
-        public bool RemoveTile(IBaseTile tile)
+        public bool RemoveTile(BaseTile tile)
         {
             return tiles.Remove(tile);
         }
 
-        public IBaseTile GetRandomTile()
+        public BaseTile GetRandomTile()
         {
             return tiles[Random.Range(0, tiles.Count)];
         }
 
-        public IBaseTile GetRandomTileFromGrid()
+        public BaseTile GetRandomTileFromGrid()
         {
             var gridTiles = tiles.FindAll(x => x.isInBar == false);
             return gridTiles[Random.Range(0, gridTiles.Count)];
@@ -121,7 +121,7 @@ namespace MatchTile.Manager
             SelectTile(hit.collider.gameObject.GetComponent<BaseTile>());
         }
 
-        public void SelectTile(IBaseTile tile)
+        public void SelectTile(BaseTile tile)
         {
             if (!tile.isLocked && !tile.isInBar)
             {

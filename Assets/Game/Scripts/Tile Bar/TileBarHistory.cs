@@ -18,12 +18,12 @@ namespace MatchTile.TileBar
             history = new LinkedList<TileBarHistoryNode>();
         }
 
-        public void AddHistoryNode(IBaseTile tile)
+        public void AddHistoryNode(BaseTile tile)
         {
             history.AddLast(new TileBarHistoryNode(tile));
         }
 
-        private TileBarHistoryNode FindMatchingNodeByTile(IBaseTile tile)
+        private TileBarHistoryNode FindMatchingNodeByTile(BaseTile tile)
         {
             var current = history.First;
 
@@ -35,7 +35,7 @@ namespace MatchTile.TileBar
             return current.Value;
         }
 
-        public bool RemoveHistoryNodeByTile(IBaseTile tile)
+        public bool RemoveHistoryNodeByTile(BaseTile tile)
         {
             var match = FindMatchingNodeByTile(tile);
 

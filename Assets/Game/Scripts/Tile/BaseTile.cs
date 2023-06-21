@@ -17,13 +17,13 @@ namespace MatchTile.Tile
         public SpriteRenderer lockedTint { get; private set; }
 
         // Tile lists
-        public List<IBaseTile> parents { get; private set; }
-        public List<IBaseTile> children { get; private set; }
+        public List<BaseTile> parents { get; private set; }
+        public List<BaseTile> children { get; private set; }
 
         private void Awake()
         {
-            parents = new List<IBaseTile>();
-            children = new List<IBaseTile>();
+            parents = new List<BaseTile>();
+            children = new List<BaseTile>();
 
             lockedTint = transform.GetChild(0).GetComponent<SpriteRenderer>();
         }
@@ -83,7 +83,7 @@ namespace MatchTile.Tile
             isInBar = false;
         }
 
-        public void AddParent(IBaseTile parent)
+        public void AddParent(BaseTile parent)
         {
             if (!parents.Contains(parent))
                 parents.Add(parent);
@@ -91,7 +91,7 @@ namespace MatchTile.Tile
             Lock();
         }
 
-        public bool RemoveParent(IBaseTile parent)
+        public bool RemoveParent(BaseTile parent)
         {
             bool result = parents.Remove(parent);
             CheckParentsExist();
@@ -121,13 +121,13 @@ namespace MatchTile.Tile
             return true;
         }
 
-        public void AddChild(IBaseTile child)
+        public void AddChild(BaseTile child)
         {
             if (!children.Contains(child))
                 children.Add(child);
         }
 
-        public bool RemoveChild(IBaseTile child)
+        public bool RemoveChild(BaseTile child)
         {
             return children.Remove(child);
         }
@@ -153,7 +153,7 @@ namespace MatchTile.Tile
             {
                 if (collider.gameObject.transform.position.z == transform.position.z + 1)
                 {
-                    AddChild(collider.gameObject.GetComponent<IBaseTile>());
+                    AddChild(collider.gameObject.GetComponent<BaseTile>());
                     collider.gameObject.GetComponent<BaseTile>().AddParent(this);
                 }
             }

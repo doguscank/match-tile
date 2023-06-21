@@ -13,8 +13,8 @@ namespace MatchTile.Tile
         TileType tileType { get; }
         SpriteRenderer lockedTint { get; }
 
-        List<IBaseTile> parents { get; }
-        List<IBaseTile> children { get; }
+        List<BaseTile> parents { get; }
+        List<BaseTile> children { get; }
 
         void Lock();
         void Unlock();
@@ -24,10 +24,10 @@ namespace MatchTile.Tile
         void SetMovedToBar();
         void SetRemovedFromBar();
         bool CheckParentsExist();
-        void AddParent(IBaseTile parent);
-        bool RemoveParent(IBaseTile parent);
-        void AddChild(IBaseTile child);
-        bool RemoveChild(IBaseTile child);
+        void AddParent(BaseTile parent);
+        bool RemoveParent(BaseTile parent);
+        void AddChild(BaseTile child);
+        bool RemoveChild(BaseTile child);
         void ResetParents();
         void ResetChildren();
         void FindChildren();

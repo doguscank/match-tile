@@ -11,7 +11,7 @@ namespace MatchTile.Manager
     [DefaultExecutionOrder(2)]
     public class TileBarManager : SingletonBase<TileBarManager>
     {
-        public LinkedList<IBaseTile> tileList { get; private set; }
+        public LinkedList<BaseTile> tileList { get; private set; }
         public TileBarHistory history { get; private set; }
         public int tileBarLength { get; private set; } = 7;
 
@@ -35,11 +35,11 @@ namespace MatchTile.Manager
 
         public void Reset()
         {
-            tileList = new LinkedList<IBaseTile>();
+            tileList = new LinkedList<BaseTile>();
             history = new TileBarHistory();
         }
 
-        private int InsertTile(IBaseTile tile)
+        private int InsertTile(BaseTile tile)
         {
             var current = tileList.First;
             int idx = 0;
@@ -138,7 +138,7 @@ namespace MatchTile.Manager
             }
         }
 
-        public void AddTile(IBaseTile tile)
+        public void AddTile(BaseTile tile)
         {
             history.AddHistoryNode(tile);
             
@@ -168,7 +168,7 @@ namespace MatchTile.Manager
             }
         }
 
-        private int RemoveTile(IBaseTile tile)
+        private int RemoveTile(BaseTile tile)
         {
             int idx = 0;
             var current = tileList.First;
