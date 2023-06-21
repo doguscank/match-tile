@@ -7,11 +7,17 @@ namespace MatchTile.Manager
 {
     public class CoinManager : SingletonBase<CoinManager>
     {
-        public int coin { get; private set; }
+        public int coins { get; private set; }
+        public int stars { get; private set; }
 
-        public void AddCoin(int coin)
+        public void AddCoins(int coins)
         {
-            this.coin += coin;
+            this.coins += coins;
+        }
+
+        public void AddStar()
+        {
+            stars ++;
         }
     }
 }

@@ -8,6 +8,8 @@ namespace MatchTile.Manager
 {
     public class GameManager : SingletonBase<GameManager>
     {
+        public bool editorMode { get; } = false;
+
         public Action<RaycastHit2D> hitOnVoid;
         public Action<RaycastHit2D> hitOnTile;
         public Action<RaycastHit2D> hitOnPowerup;
@@ -19,37 +21,28 @@ namespace MatchTile.Manager
 
         private void Start()
         {
-#if UNITY_EDITOR
-            GameObject.Find("Canvas").transform.Find("SaveLevelButton").gameObject.SetActive(true);
-#else
-            GameObject.Find("DebugTile").SetActive(false);
-            InputManager.Instance.onLeftClick += OnTap;
-#endif
-
-            // TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 0f), Tile.TileType.Tile0);
-
-            // TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, 0.75f, 1f), Tile.TileType.Tile1);
-            // TileManager.Instance.SpawnTileAt(new Vector3(0.75f, 0.75f, 1f), Tile.TileType.Tile1);
-            // TileManager.Instance.SpawnTileAt(new Vector3(-0.75f, -0.75f, 1f), Tile.TileType.Tile2);
-            // TileManager.Instance.SpawnTileAt(new Vector3(0.75f, -0.75f, 1f), Tile.TileType.Tile2);
-
-            // TileManager.Instance.SpawnTileAt(new Vector3(0f, 0f, 2f), Tile.TileType.Tile0);
-            // TileManager.Instance.SpawnTileAt(new Vector3(1.5f, -1.5f, 2f), Tile.TileType.Tile2);
-            // TileManager.Instance.SpawnTileAt(new Vector3(1.5f, 1.5f, 2f), Tile.TileType.Tile0);
-            // TileManager.Instance.SpawnTileAt(new Vector3(-1.5f, -1.5f, 2f), Tile.TileType.Tile1);
-            // TileManager.Instance.SpawnTileAt(new Vector3(-1.5f, 1.5f, 2f), Tile.TileType.Tile1);
-            // TileManager.Instance.SpawnTileAt(new Vector3(0f, -1.5f, 2f), Tile.TileType.Tile1);
-            // TileManager.Instance.SpawnTileAt(new Vector3(0f, 1.5f, 2f), Tile.TileType.Tile1);
-
+            if (editorMode)
+            {
+                GameObject.Find("Canvas").transform.Find("SaveLevelButton").gameObject.SetActive(true);
+            }
+            else
+            {
+                GameObject.Find("DebugTile").SetActive(false);
+                InputManager.Instance.onLeftClick += OnTap;
+                InputManager.Instance.onTouch += OnTap;
+            }
         }
 
         private void Update()
         {
-
+            
         }
 
         private void OnTap(Vector2 clickPosition)
         {
+            Debug.Log(clickPosition.ToString());
+            Debug.Log(Camera.main.ScreenToWorldPoint(clickPosition).ToString());
+
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(clickPosition), Vector2.zero);
             // Check if clicked on a tile
             if (hit.collider != null)

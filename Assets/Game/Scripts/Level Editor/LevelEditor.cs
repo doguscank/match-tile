@@ -17,22 +17,23 @@ namespace MatchTile.LevelEditor
 
         private void Awake()
         {
-#if UNITY_EDITOR
-#else
-            // enabled = false;
-#endif
-            debugTile = GameObject.Find("DebugTile");
+            if (GameManager.Instance.editorMode)
+            {
+                debugTile = GameObject.Find("DebugTile");
 
-            debugTile.GetComponent<IBaseTile>().SetTileType(TileType.Tile0);
+                debugTile.GetComponent<IBaseTile>().SetTileType(TileType.Tile0);
 
-            InputManager.Instance.onIncreaseTileTypePush += IncreaseTileType;
-            InputManager.Instance.onDecreaseTileTypePush += DecreaseTileType;
-            InputManager.Instance.onIncreaseTileTypePush += UpdateDebugTile;
-            InputManager.Instance.onDecreaseTileTypePush += UpdateDebugTile;
-            InputManager.Instance.onIncreaseLayerPush += IncreaseLayer;
-            InputManager.Instance.onDecreaseLayerPush += DecreaseLayer;
-            InputManager.Instance.onLeftClick += OnTap;
-            InputManager.Instance.onRightClick += OnRightClick;
+                InputManager.Instance.onIncreaseTileTypePush += IncreaseTileType;
+                InputManager.Instance.onDecreaseTileTypePush += DecreaseTileType;
+                InputManager.Instance.onIncreaseTileTypePush += UpdateDebugTile;
+                InputManager.Instance.onDecreaseTileTypePush += UpdateDebugTile;
+                InputManager.Instance.onIncreaseLayerPush += IncreaseLayer;
+                InputManager.Instance.onDecreaseLayerPush += DecreaseLayer;
+                InputManager.Instance.onLeftClick += OnTap;
+                InputManager.Instance.onRightClick += OnRightClick;
+            }
+            else
+                enabled = false;
         }
 
         private void Start()

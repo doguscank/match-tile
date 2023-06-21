@@ -19,8 +19,7 @@ namespace MatchTile.Manager
 
         void Awake()
         {
-            tileList = new LinkedList<IBaseTile>();
-            history = new TileBarHistory();
+            Reset();
         }
 
         void Start()
@@ -31,6 +30,12 @@ namespace MatchTile.Manager
         void Update()
         {
             
+        }
+
+        public void Reset()
+        {
+            tileList = new LinkedList<IBaseTile>();
+            history = new TileBarHistory();
         }
 
         private int InsertTile(IBaseTile tile)
@@ -124,6 +129,7 @@ namespace MatchTile.Manager
             for (int i = 0; i < 3; i++)
             {
                 var temp = current.Next;
+                TileManager.Instance.RemoveTile(current.Value);
                 Destroy(current.Value.GetGameobject());
                 tileList.Remove(current);
                 current = temp;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using MatchTile.Level;
 using MatchTile.Tile;
@@ -12,6 +13,7 @@ namespace MatchTile.Manager
     public class LevelManager : SingletonBase<LevelManager>
     {
         public LevelData allLevelsData { get; private set; }
+        public int playerLevel { get; private set; } = 0;
 
         private void Awake()
         {
@@ -20,7 +22,7 @@ namespace MatchTile.Manager
 
         private void Start()
         {
-            
+
         }
 
         private void Update()
@@ -28,9 +30,20 @@ namespace MatchTile.Manager
             
         }
 
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += LoadLastLevel;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= LoadLastLevel;
+        }
+
         public void ResetLevel()
         {
-            
+            TileBarManager.Instance.Reset();
+            TileManager.Instance.Reset();
         }
 
         public void LoadLevel(int levelId)
@@ -46,6 +59,17 @@ namespace MatchTile.Manager
             {
                 TileManager.Instance.SpawnTileAt(tileData.position, tileData.type);
             }
+        }
+
+        public void LoadLevel()
+        {
+            LoadLevel(playerLevel);
+        }
+
+        public void LoadLastLevel(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == "GameScreen")
+                LoadLevel(playerLevel);
         }
 
         public void LoadLevels()
@@ -64,7 +88,6 @@ namespace MatchTile.Manager
 
         public void SaveLevel()
         {
-#if UNITY_EDITOR
             List<TileDatum> tileData = new List<TileDatum>();
 
             foreach (IBaseTile tile in TileManager.Instance.GetTiles())
@@ -77,7 +100,6 @@ namespace MatchTile.Manager
 
             string json = JsonUtility.ToJson(allLevelsData);
             System.IO.File.WriteAllText(Application.dataPath + "/Resources/Level/Levels.json", json);
-#endif
         }
     }
 }

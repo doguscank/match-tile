@@ -12,6 +12,7 @@ namespace MatchTile.Manager
     {
         [SerializeField] private List<IBaseTile> tiles;
         [SerializeField] private GameObject tilePrefab;
+        public int numTiles => tiles.Count;
         
         public GameObject tileObjectsParent { get; private set; }
 
@@ -30,6 +31,16 @@ namespace MatchTile.Manager
         void Update()
         {
             
+        }
+
+        public void Reset()
+        {
+            foreach (var tile in tiles)
+            {
+                Destroy(tile.GetGameobject());
+            }
+
+            tiles = new List<IBaseTile>();
         }
 
         public IBaseTile GetTileById(int id)
