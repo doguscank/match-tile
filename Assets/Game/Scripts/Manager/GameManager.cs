@@ -75,8 +75,6 @@ namespace MatchTile.Manager
 
         private void OnTap(Vector2 clickPosition)
         {
-            Debug.Log("Tappination");
-
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(clickPosition), Vector2.zero);
             // Check if clicked on a tile
             if (hit.collider != null)
