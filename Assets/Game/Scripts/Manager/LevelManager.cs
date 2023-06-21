@@ -46,12 +46,6 @@ namespace MatchTile.Manager
                 SceneManager.sceneLoaded -= LoadLastLevel;
         }
 
-        public void Reset()
-        {
-            TileBarManager.Instance.Reset();
-            TileManager.Instance.Reset();
-        }
-
         public void UpdatePowerupButtonStates()
         {
             if (PlayerDataManager.Instance.playerLevel > 0) RedoPowerup.Instance.SetLocked(false);
@@ -64,10 +58,12 @@ namespace MatchTile.Manager
             else HelperPowerup.Instance.SetLocked(true);
         }
 
-        public void LoadLevel(int levelId, bool reset=true)
+        public void LoadLevel(int levelId, bool resetTileManager=true)
         {
-            if (reset)
-                Reset();
+            if (resetTileManager)
+                TileManager.Instance.Reset();
+
+            TileBarManager.Instance.Reset();
 
             UpdatePowerupButtonStates();
 
@@ -90,7 +86,7 @@ namespace MatchTile.Manager
         public void LoadLastLevel(Scene scene, LoadSceneMode mode)
         {
             if (scene.name == "GameScreen" && scene.isLoaded)
-                LoadLevel(PlayerDataManager.Instance.playerLevel, reset: false);
+                LoadLevel(PlayerDataManager.Instance.playerLevel, resetTileManager: false);
         }
 
         public void LoadLevels()

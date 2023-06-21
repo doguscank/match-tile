@@ -27,8 +27,6 @@ namespace MatchTile.Manager
             {
                 GameObject.Find("Canvas").transform.Find("SaveLevelButton").gameObject.SetActive(false);
                 GameObject.Find("DebugTile").SetActive(false);
-                InputManager.Instance.onLeftClick += OnTap;
-                InputManager.Instance.onTouch += OnTap;
             }
         }
 
@@ -55,6 +53,24 @@ namespace MatchTile.Manager
             }
         }
 
+        private void OnEnable()
+        {
+            if (!editorMode)
+            {
+                InputManager.Instance.onLeftClick += OnTap;
+                InputManager.Instance.onTouch += OnTap;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (!editorMode)
+            {
+                InputManager.Instance.onLeftClick -= OnTap;
+                InputManager.Instance.onTouch -= OnTap;
+            }
+        }
+
         public void ResetIsWaitingResponse()
         {
             isWaitingResponse = false;
@@ -62,6 +78,8 @@ namespace MatchTile.Manager
 
         private void OnTap(Vector2 clickPosition)
         {
+            Debug.Log("Tappination");
+
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(clickPosition), Vector2.zero);
             // Check if clicked on a tile
             if (hit.collider != null)

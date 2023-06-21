@@ -17,7 +17,7 @@ public class TileEditor : Editor
             EditorGUILayout.LabelField("Parents");
             for (int i = 0; i < tile.parents.Count; i++)
             {
-                tile.parents[i] = (IBaseTile)EditorGUILayout.ObjectField(tile.parents[i] as UnityEngine.Object, typeof(IBaseTile), allowSceneObjects: true);
+                tile.parents[i] = (BaseTile)EditorGUILayout.ObjectField(tile.parents[i] as UnityEngine.Object, typeof(BaseTile), allowSceneObjects: true);
             }
         }
 
@@ -26,7 +26,7 @@ public class TileEditor : Editor
             EditorGUILayout.LabelField("Children");
             for (int i = 0; i < tile.children.Count; i++)
             {
-                tile.children[i] = (IBaseTile)EditorGUILayout.ObjectField(tile.children[i] as UnityEngine.Object, typeof(IBaseTile), allowSceneObjects: true);
+                tile.children[i] = (BaseTile)EditorGUILayout.ObjectField(tile.children[i] as UnityEngine.Object, typeof(BaseTile), allowSceneObjects: true);
             }
         }
     }

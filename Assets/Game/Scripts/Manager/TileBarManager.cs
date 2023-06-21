@@ -20,7 +20,8 @@ namespace MatchTile.Manager
 
         void Awake()
         {
-            Reset();
+            tileList = new LinkedList<BaseTile>();
+            history = new TileBarHistory();
         }
 
         void Start()
@@ -35,6 +36,18 @@ namespace MatchTile.Manager
 
         public void Reset()
         {
+            var current = tileList.First;
+
+            while (current != null)
+            {
+                var go = current.Value.GetGameobject();
+                if (go != null)
+                {
+                    current.Value.SetDestroyed();
+                    Destroy(go);
+                }
+            }
+
             tileList = new LinkedList<BaseTile>();
             history = new TileBarHistory();
         }
