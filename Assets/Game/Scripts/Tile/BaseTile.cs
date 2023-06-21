@@ -6,6 +6,7 @@ using MatchTile.Manager;
 
 namespace MatchTile.Tile
 {
+    [System.Serializable]
     public class BaseTile : MonoBehaviour, IBaseTile
     {
         // Tile properties
