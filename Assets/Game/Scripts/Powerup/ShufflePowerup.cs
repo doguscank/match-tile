@@ -41,6 +41,20 @@ namespace MatchTile.Powerup
                 for (int i = 0; i < tiles.Count; i++)
                 {
                     tiles[i].GetGameobject().GetComponent<TileMovement>().MoveToPosition(positions[i]);
+                    tiles[i].ResetParents();
+                    tiles[i].ResetChildren();
+
+                    tiles[i].FindChildren();
+                }
+
+                // for (int i = 0; i < tiles.Count; i++)
+                // {
+                //     tiles[i].FindChildren();
+                // }
+
+                for (int i = 0; i < tiles.Count; i++)
+                {
+                    tiles[i].CheckParentsExist();
                 }
             }
         }

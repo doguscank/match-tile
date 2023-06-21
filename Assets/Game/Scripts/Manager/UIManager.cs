@@ -28,5 +28,15 @@ namespace MatchTile.Manager
         {
             GameObject.Find("Canvas").transform.Find("LevelFailed").gameObject.SetActive(false);
         }
+
+        public void ActivateAllLevelsClearedScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("LevelsFinished").gameObject.SetActive(true);
+        }
+
+        public void DeactivateAllLevelsClearedScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("LevelsFinished").gameObject.SetActive(false);
+        }
     }
 }

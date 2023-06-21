@@ -87,6 +87,16 @@ namespace MatchTile.Tile
             return result;
         }
 
+        public void ResetParents()
+        {
+            parents = new List<IBaseTile>();
+        }
+
+        public void ResetChildren()
+        {
+            children = new List<IBaseTile>();
+        }
+
         public bool CheckParentsExist()
         {
             if (parents.Count == 0)
@@ -120,8 +130,7 @@ namespace MatchTile.Tile
             return transform.position;
         }
 
-        // Level editor
-        private void FindChildren()
+        public void FindChildren()
         {
             Bounds overlapBounds = new Bounds(transform.position, transform.localScale);
             Collider2D[] colliders = Physics2D.OverlapBoxAll(overlapBounds.center, overlapBounds.size, 0f);

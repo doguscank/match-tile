@@ -8,7 +8,7 @@ namespace MatchTile.Manager
 {
     public class GameManager : SingletonBase<GameManager>
     {
-        public bool editorMode { get; } = true;
+        public bool editorMode { get; } = false;
         public bool isWaitingResponse { get; private set; } = false;
         public int winnerCoins { get; } = 100;
 
@@ -29,6 +29,7 @@ namespace MatchTile.Manager
             }
             else
             {
+                GameObject.Find("Canvas").transform.Find("SaveLevelButton").gameObject.SetActive(false);
                 GameObject.Find("DebugTile").SetActive(false);
                 InputManager.Instance.onLeftClick += OnTap;
                 InputManager.Instance.onTouch += OnTap;
