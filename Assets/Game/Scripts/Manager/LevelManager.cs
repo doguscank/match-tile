@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -23,17 +22,7 @@ namespace MatchTile.Manager
             if (!GameManager.Instance.editorMode)
                 UpdatePowerupButtonStates();
         }
-
-        private void Start()
-        {
-
-        }
-
-        private void Update()
-        {
-
-        }
-
+        
         private void OnEnable()
         {
             if (!GameManager.Instance.editorMode)

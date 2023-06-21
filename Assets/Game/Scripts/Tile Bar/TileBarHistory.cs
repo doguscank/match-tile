@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-using MatchTile.Powerup;
 using MatchTile.Tile;
-using MatchTile.Utils;
 
 namespace MatchTile.TileBar
 {

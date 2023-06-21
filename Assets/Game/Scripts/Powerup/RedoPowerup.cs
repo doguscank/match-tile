@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 using MatchTile.Manager;
 using MatchTile.Tile;
-using MatchTile.TileBar;
 using MatchTile.Utils;
 
 namespace MatchTile.Powerup

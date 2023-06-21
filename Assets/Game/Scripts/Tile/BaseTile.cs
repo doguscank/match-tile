@@ -2,8 +2,6 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-using MatchTile.Manager;
-
 namespace MatchTile.Tile
 {
     [System.Serializable]
@@ -32,11 +30,6 @@ namespace MatchTile.Tile
         private void Start()
         {
             FindChildren();
-        }
-
-        private void Update()
-        {
-
         }
 
         public void SetTileId(int id)

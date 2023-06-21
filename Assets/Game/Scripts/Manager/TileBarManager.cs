@@ -24,16 +24,6 @@ namespace MatchTile.Manager
             history = new TileBarHistory();
         }
 
-        void Start()
-        {
-            
-        }
-
-        void Update()
-        {
-            
-        }
-
         public void Reset()
         {
             tileList = new LinkedList<BaseTile>();

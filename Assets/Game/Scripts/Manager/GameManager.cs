@@ -2,6 +2,8 @@ using System;
 
 using UnityEngine;
 
+using CandyCoded.HapticFeedback;
+
 using MatchTile.Utils;
 
 namespace MatchTile.Manager
@@ -28,11 +30,6 @@ namespace MatchTile.Manager
                 GameObject.Find("Canvas").transform.Find("SaveLevelButton").gameObject.SetActive(false);
                 GameObject.Find("DebugTile").SetActive(false);
             }
-        }
-
-        private void Start()
-        {
-            
         }
 
         private void Update()
@@ -84,7 +81,7 @@ namespace MatchTile.Manager
             // Check if clicked on a tile
             if (hit.collider != null)
             {
-                Handheld.Vibrate();
+                HapticFeedback.LightFeedback();
                 hitOnTile?.Invoke(hit);
             }
             else

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +7,6 @@ using UnityEngine.UI;
 
 using MatchTile.Manager;
 using MatchTile.Tile;
-using MatchTile.TileBar;
 using MatchTile.Utils;
 
 namespace MatchTile.Powerup

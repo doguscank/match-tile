@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 
 using UnityEngine;
 
 using MatchTile.Utils;
 using MatchTile.Tile;
-using MatchTile.TileBar;
 
 namespace MatchTile.Manager
 {   
@@ -26,16 +24,6 @@ namespace MatchTile.Manager
             tileObjectsParent = GameObject.FindGameObjectWithTag("TilesObject");
             
             GameManager.Instance.hitOnTile += SelectTile;
-        }
-
-        void Start()
-        {
-
-        }
-
-        void Update()
-        {
-            
         }
 
         public void Reset()
@@ -99,8 +87,6 @@ namespace MatchTile.Manager
             newTile.transform.name = tiles.Count.ToString();
             tileScript.SetTileId(tiles.Count);
             tileScript.SetTileType(tileType);
-
-            // newTile.transform.SetParent(tileObjectsParent.transform);
 
             return newTile;
         }
