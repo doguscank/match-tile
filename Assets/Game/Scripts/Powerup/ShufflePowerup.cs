@@ -36,25 +36,11 @@ namespace MatchTile.Powerup
             if (!isLocked)
             {
                 List<IBaseTile> tiles = TileManager.Instance.GetTiles();
-                List<Vector3> positions = tiles.Select(tile => tile.GetPosition()).OrderBy(_ => Guid.NewGuid()).ToList();
+                List<TileType> tileTypes = tiles.Select(tile => tile.tileType).OrderBy(_ => Guid.NewGuid()).ToList();
 
                 for (int i = 0; i < tiles.Count; i++)
                 {
-                    tiles[i].GetGameobject().GetComponent<TileMovement>().MoveToPosition(positions[i]);
-                    tiles[i].ResetParents();
-                    tiles[i].ResetChildren();
-
-                    tiles[i].FindChildren();
-                }
-
-                // for (int i = 0; i < tiles.Count; i++)
-                // {
-                //     tiles[i].FindChildren();
-                // }
-
-                for (int i = 0; i < tiles.Count; i++)
-                {
-                    tiles[i].CheckParentsExist();
+                    tiles[i].SetTileType(tileTypes[i]);
                 }
             }
         }
