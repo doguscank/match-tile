@@ -7,6 +7,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(5)]
     public class UIManager : SingletonBase<UIManager>
     {
         public void ActivateLevelCompleteScreen()

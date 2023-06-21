@@ -6,6 +6,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(0)]
     public class MainMenuManager : SingletonBase<MainMenuManager>
     {
         private int resetClicks;
@@ -14,7 +15,7 @@ namespace MatchTile.Manager
         {
             resetClicks = 0;
 
-            if (PlayerDataManager.Instance.playerLevel == 5)
+            if (PlayerDataManager.Instance.playerLevel >= 5)
             {
                 GameObject.Find("Canvas").transform.Find("ResetLevelsButton").gameObject.SetActive(true);
                 GameObject.Find("Canvas").transform.Find("PlayButton").gameObject.SetActive(false);

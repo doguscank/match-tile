@@ -8,6 +8,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(2)]
     public class TileBarManager : SingletonBase<TileBarManager>
     {
         public LinkedList<IBaseTile> tileList { get; private set; }
@@ -130,6 +131,7 @@ namespace MatchTile.Manager
             {
                 var temp = current.Next;
                 TileManager.Instance.RemoveTile(current.Value);
+                current.Value.SetDestroyed();
                 Destroy(current.Value.GetGameobject());
                 tileList.Remove(current);
                 current = temp;
@@ -153,13 +155,10 @@ namespace MatchTile.Manager
             tile.SetMovedToBar();
             tile.GetGameobject().GetComponent<TileMovement>().MoveToPosition(TileBarPositions.Positions7[idx]);
             // Move tiles with greater tile type id by one to right
-            Debug.Log("Moving from idx: " + idx.ToString());
             MoveTilesRightFromIndex(idx);
 
             if (CheckMatch(idx))
             {
-                Debug.Log("Match found!");
-
                 history.Reset();
 
                 RemoveMatchedTiles(idx);

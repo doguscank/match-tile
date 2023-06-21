@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 
@@ -7,7 +8,8 @@ using MatchTile.Tile;
 using MatchTile.TileBar;
 
 namespace MatchTile.Manager
-{
+{   
+    [DefaultExecutionOrder(-15)]
     public class TileManager : SingletonBase<TileManager>
     {
         [SerializeField] private List<IBaseTile> tiles;
@@ -18,14 +20,16 @@ namespace MatchTile.Manager
 
         void Awake()
         {
-            tiles = new List<IBaseTile>();
             tilePrefab = Resources.Load<GameObject>("Level/Prefabs/Tile");
+
+            tiles = new List<IBaseTile>();
             tileObjectsParent = GameObject.FindGameObjectWithTag("TilesObject");
+            
+            GameManager.Instance.hitOnTile += SelectTile;
         }
 
         void Start()
         {
-            GameManager.Instance.hitOnTile += SelectTile;
         }
 
         void Update()
@@ -37,10 +41,14 @@ namespace MatchTile.Manager
         {
             foreach (var tile in tiles)
             {
-                Destroy(tile.GetGameobject());
+                if (tile != null && tile.GetGameobject() != null)
+                {
+                    tile.SetDestroyed();
+                    Destroy(tile.GetGameobject());
+                }
             }
 
-            tiles = new List<IBaseTile>();
+            tiles.Clear();
         }
 
         public IBaseTile GetTileById(int id)
@@ -51,6 +59,11 @@ namespace MatchTile.Manager
         public List<IBaseTile> GetTilesByType(TileType type)
         {
             return tiles.FindAll(x => x.tileType == type);
+        }
+
+        public List<IBaseTile> GetTilesByTypeFromGrid(TileType type)
+        {
+            return tiles.FindAll(x => x.tileType == type && !x.isInBar);
         }
 
         public List<IBaseTile> GetTiles()
@@ -66,6 +79,12 @@ namespace MatchTile.Manager
         public IBaseTile GetRandomTile()
         {
             return tiles[Random.Range(0, tiles.Count)];
+        }
+
+        public IBaseTile GetRandomTileFromGrid()
+        {
+            var gridTiles = tiles.FindAll(x => x.isInBar == false);
+            return gridTiles[Random.Range(0, gridTiles.Count)];
         }
 
         public GameObject SpawnTileAt(Vector3 position)
@@ -84,7 +103,7 @@ namespace MatchTile.Manager
             tileScript.SetTileId(tiles.Count);
             tileScript.SetTileType(tileType);
 
-            newTile.transform.SetParent(tileObjectsParent.transform);
+            // newTile.transform.SetParent(tileObjectsParent.transform);
 
             return newTile;
         }

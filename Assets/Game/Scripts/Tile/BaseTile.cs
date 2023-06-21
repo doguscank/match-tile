@@ -11,6 +11,7 @@ namespace MatchTile.Tile
         // Tile properties
         public bool isLocked { get; private set; } = false;
         public bool isInBar { get; private set; } = false;
+        public bool isDestroyed { get; private set; } = false;
         public int tileId { get; private set; }
         public TileType tileType { get; private set; }
         public SpriteRenderer lockedTint { get; private set; }
@@ -51,14 +52,25 @@ namespace MatchTile.Tile
 
         public void Lock()
         {
-            isLocked = true;
-            lockedTint.enabled = isLocked;
+            if (!isLocked)
+            {
+                isLocked = true;
+                lockedTint.enabled = isLocked;
+            }
         }
 
         public void Unlock()
         {
-            isLocked = false;
-            lockedTint.enabled = isLocked;
+            if (isLocked)
+            {
+                isLocked = false;
+                lockedTint.enabled = isLocked;
+            }
+        }
+
+        public void SetDestroyed()
+        {
+            isDestroyed = true;
         }
 
         public void SetMovedToBar()
@@ -122,7 +134,9 @@ namespace MatchTile.Tile
 
         public GameObject GetGameobject()
         {
-            return gameObject;
+            if (!isDestroyed && gameObject != null)
+                return gameObject;
+            return null;
         }
 
         public Vector3 GetPosition()

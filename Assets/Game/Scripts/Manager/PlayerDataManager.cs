@@ -7,6 +7,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(-3)]
     public class PlayerDataManager : SingletonBase<PlayerDataManager>
     {
         public int coins { get; private set; }
@@ -16,6 +17,8 @@ namespace MatchTile.Manager
         private void Awake()
         {
             LoadData();
+
+            ResetPlayerPrefs();
         }
 
         public void UpdateUiValues()
@@ -49,13 +52,10 @@ namespace MatchTile.Manager
             PlayerPrefs.Save();
         }
 
-        public void ResetData()
+        public void ResetPlayerPrefs()
         {
-            coins = 0;
-            stars = 0;
-            playerLevel = 0;
-
-            SaveData();
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
         }
 
         public void ResetLevels()

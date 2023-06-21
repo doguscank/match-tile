@@ -11,6 +11,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(-1)]
     public class LevelManager : SingletonBase<LevelManager>
     {
         public LevelData allLevelsData { get; private set; }
@@ -63,9 +64,10 @@ namespace MatchTile.Manager
             else HelperPowerup.Instance.SetLocked(true);
         }
 
-        public void LoadLevel(int levelId)
+        public void LoadLevel(int levelId, bool reset=true)
         {
-            Reset();
+            if (reset)
+                Reset();
 
             UpdatePowerupButtonStates();
 
@@ -87,8 +89,8 @@ namespace MatchTile.Manager
 
         public void LoadLastLevel(Scene scene, LoadSceneMode mode)
         {
-            if (scene.name == "GameScreen")
-                LoadLevel(PlayerDataManager.Instance.playerLevel);
+            if (scene.name == "GameScreen" && scene.isLoaded)
+                LoadLevel(PlayerDataManager.Instance.playerLevel, reset: false);
         }
 
         public void LoadLevels()

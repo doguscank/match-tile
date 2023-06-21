@@ -9,6 +9,7 @@ namespace MatchTile.Tile
         bool isLocked { get; }
         bool isInBar { get; }
         int tileId { get; }
+        bool isDestroyed { get; }
         TileType tileType { get; }
         SpriteRenderer lockedTint { get; }
 
@@ -17,6 +18,7 @@ namespace MatchTile.Tile
 
         void Lock();
         void Unlock();
+        void SetDestroyed();
         void SetTileId(int id);
         void SetTileType(TileType type);
         void SetMovedToBar();

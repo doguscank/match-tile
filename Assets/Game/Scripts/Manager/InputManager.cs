@@ -7,6 +7,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(-10)]
     public class InputManager : SingletonBase<InputManager>
     {
         public Action<Vector2> onLeftClick;

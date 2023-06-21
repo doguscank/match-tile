@@ -6,6 +6,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(-10)]
     public class GameManager : SingletonBase<GameManager>
     {
         public bool editorMode { get; } = false;
@@ -18,11 +19,6 @@ namespace MatchTile.Manager
 
         private void Awake()
         {
-
-        }
-
-        private void Start()
-        {
             if (editorMode)
             {
                 GameObject.Find("Canvas").transform.Find("SaveLevelButton").gameObject.SetActive(true);
@@ -34,6 +30,11 @@ namespace MatchTile.Manager
                 InputManager.Instance.onLeftClick += OnTap;
                 InputManager.Instance.onTouch += OnTap;
             }
+        }
+
+        private void Start()
+        {
+            
         }
 
         private void Update()
@@ -61,9 +62,6 @@ namespace MatchTile.Manager
 
         private void OnTap(Vector2 clickPosition)
         {
-            Debug.Log(clickPosition.ToString());
-            Debug.Log(Camera.main.ScreenToWorldPoint(clickPosition).ToString());
-
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(clickPosition), Vector2.zero);
             // Check if clicked on a tile
             if (hit.collider != null)
@@ -88,7 +86,10 @@ namespace MatchTile.Manager
             PlayerDataManager.Instance.AddStar();
             PlayerDataManager.Instance.LevelUp();
 
-            UIManager.Instance.ActivateLevelCompleteScreen();
+            if (PlayerDataManager.Instance.playerLevel >= 5)
+                UIManager.Instance.ActivateAllLevelsClearedScreen();
+            else
+                UIManager.Instance.ActivateLevelCompleteScreen();
         }
     }
 }

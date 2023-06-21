@@ -7,6 +7,7 @@ using MatchTile.Utils;
 
 namespace MatchTile.Manager
 {
+    [DefaultExecutionOrder(-2)]
     public class SceneSelector : SingletonBase<SceneSelector>
     {
         public void LoadGameScene()

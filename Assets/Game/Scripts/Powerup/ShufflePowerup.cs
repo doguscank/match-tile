@@ -31,8 +31,6 @@ namespace MatchTile.Powerup
 
         public void Activate()
         {
-            Debug.Log("Activated shuffle");
-
             if (!isLocked)
             {
                 List<IBaseTile> tiles = TileManager.Instance.GetTiles();

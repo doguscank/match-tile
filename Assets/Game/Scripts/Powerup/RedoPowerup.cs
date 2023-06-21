@@ -31,8 +31,6 @@ namespace MatchTile.Powerup
 
         public void Activate()
         {
-            Debug.Log("Activated redo");
-
             if (!isLocked && isEnabled)
             {
                 TileBarManager.Instance.Redo();
