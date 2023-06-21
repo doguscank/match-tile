@@ -65,6 +65,21 @@ namespace MatchTile.Manager
 
             UpdatePowerupButtonStates();
 
+            if (levelId == 1 && PlayerDataManager.Instance.redoTutorialShown == 0)
+            {
+                UIManager.Instance.ActivateRedoPowerupTutorialScreen();
+                PlayerDataManager.Instance.redoTutorialShown = 1;
+            }
+            if (levelId == 2 && PlayerDataManager.Instance.shuffleTutorialShown == 0) {
+                UIManager.Instance.ActivateShufflePowerupTutorialScreen();
+                PlayerDataManager.Instance.shuffleTutorialShown = 1;
+            }
+
+            if (levelId == 3 && PlayerDataManager.Instance.helperTutorialShown == 0) {
+                UIManager.Instance.ActivateHelperPowerupTutorialScreen();
+                PlayerDataManager.Instance.helperTutorialShown = 1;
+            }
+
             if (levelId >= allLevelsData.levelData.Count)
                 throw new System.IndexOutOfRangeException($"Level with Id {levelId} is not available!");
 

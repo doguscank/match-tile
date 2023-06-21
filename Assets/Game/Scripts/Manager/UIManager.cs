@@ -39,5 +39,35 @@ namespace MatchTile.Manager
         {
             GameObject.Find("Canvas").transform.Find("LevelsFinished").gameObject.SetActive(false);
         }
+
+        public void ActivateRedoPowerupTutorialScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("RedoTutorial").gameObject.SetActive(true);
+        }
+
+        public void DectivateRedoPowerupTutorialScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("RedoTutorial").gameObject.SetActive(false);
+        }
+
+        public void ActivateShufflePowerupTutorialScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("ShuffleTutorial").gameObject.SetActive(true);
+        }
+
+        public void DeactivateShufflePowerupTutorialScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("ShuffleTutorial").gameObject.SetActive(false);
+        }
+
+        public void ActivateHelperPowerupTutorialScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("HelperTutorial").gameObject.SetActive(true);
+        }
+
+        public void DeactivateHelperPowerupTutorialScreen()
+        {
+            GameObject.Find("Canvas").transform.Find("HelperTutorial").gameObject.SetActive(false);
+        }
     }
 }

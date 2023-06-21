@@ -13,6 +13,9 @@ namespace MatchTile.Manager
         public int coins { get; private set; }
         public int stars { get; private set; }
         public int playerLevel { get; private set; }
+        public int redoTutorialShown { get; set; }
+        public int shuffleTutorialShown { get; set; }
+        public int helperTutorialShown { get; set; }
 
         private void Awake()
         {
@@ -40,6 +43,9 @@ namespace MatchTile.Manager
             coins = PlayerPrefs.GetInt("Coins", 0);
             stars = PlayerPrefs.GetInt("Stars", 0);
             playerLevel = PlayerPrefs.GetInt("PlayerLevel", 0);
+            redoTutorialShown = PlayerPrefs.GetInt("RedoTutorialShown", 0);
+            shuffleTutorialShown = PlayerPrefs.GetInt("ShuffleTutorialShown", 0);
+            helperTutorialShown = PlayerPrefs.GetInt("HelperTutorialShown", 0);
 
             UpdateUiValues();
         }
@@ -49,6 +55,9 @@ namespace MatchTile.Manager
             PlayerPrefs.SetInt("Coins", coins);
             PlayerPrefs.SetInt("Stars", stars);
             PlayerPrefs.SetInt("PlayerLevel", playerLevel);
+            PlayerPrefs.SetInt("RedoTutorialShown", redoTutorialShown);
+            PlayerPrefs.SetInt("ShuffleTutorialShown", shuffleTutorialShown);
+            PlayerPrefs.SetInt("HelperTutorialShown", helperTutorialShown);
             PlayerPrefs.Save();
         }
 
