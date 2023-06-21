@@ -132,8 +132,8 @@ namespace MatchTile.Manager
             {
                 var temp = current.Next;
                 TileManager.Instance.RemoveTile(current.Value);
-                current.Value.SetDestroyed();
                 Destroy(current.Value.GetGameobject());
+                current.Value.SetDestroyed();
                 tileList.Remove(current);
                 current = temp;
             }
