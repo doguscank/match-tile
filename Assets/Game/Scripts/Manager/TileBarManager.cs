@@ -164,13 +164,9 @@ namespace MatchTile.Manager
 
                 RemoveMatchedTiles(idx);
                 MoveTilesLeftFromIndex(idx - 2);
-            }
 
-            // Move tile from game screen to tile bar
-            // Check if 3 match exists
-            // Remove tiles if match exists
-            // Check if isFull
-            // Game over if isFull = true
+                return;
+            }
         }
 
         private int RemoveTile(IBaseTile tile)

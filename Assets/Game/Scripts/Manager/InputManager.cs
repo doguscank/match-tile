@@ -28,7 +28,7 @@ namespace MatchTile.Manager
             keyboardControls = new KeyboardControls();
 
             touchControls.Touch.PrimaryTouch.performed += ctx => onTouch?.Invoke(touchControls.Touch.PrimaryTouch.ReadValue<Vector2>());
-            mouseControls.Mouse.LeftClick.performed += ctx => onLeftClick?.Invoke(Mouse.current.position.ReadValue());
+            mouseControls.Mouse.LeftClick.started += ctx => onLeftClick?.Invoke(Mouse.current.position.ReadValue());
 
             if (GameManager.Instance.editorMode)
             {

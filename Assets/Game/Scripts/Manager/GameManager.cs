@@ -8,7 +8,9 @@ namespace MatchTile.Manager
 {
     public class GameManager : SingletonBase<GameManager>
     {
-        public bool editorMode { get; } = false;
+        public bool editorMode { get; } = true;
+        public bool isWaitingResponse { get; private set; } = false;
+        public int winnerCoins { get; } = 100;
 
         public Action<RaycastHit2D> hitOnVoid;
         public Action<RaycastHit2D> hitOnTile;
@@ -35,7 +37,25 @@ namespace MatchTile.Manager
 
         private void Update()
         {
-            
+            if (!isWaitingResponse && !editorMode)
+            {
+                if (TileBarManager.Instance.isFull)
+                {
+                    LevelFailed();
+                    isWaitingResponse = true;
+                }
+
+                if (TileManager.Instance.numTiles == 0)
+                {
+                    LevelPassed();
+                    isWaitingResponse = true;
+                }
+            }
+        }
+
+        public void ResetIsWaitingResponse()
+        {
+            isWaitingResponse = false;
         }
 
         private void OnTap(Vector2 clickPosition)
@@ -54,6 +74,20 @@ namespace MatchTile.Manager
             {
                 hitOnVoid?.Invoke(hit);
             }
+        }
+
+        public void LevelFailed()
+        {
+            UIManager.Instance.ActivateLevelFailedScreen();
+        }
+
+        public void LevelPassed()
+        {
+            PlayerDataManager.Instance.AddCoins(winnerCoins);
+            PlayerDataManager.Instance.AddStar();
+            PlayerDataManager.Instance.LevelUp();
+
+            UIManager.Instance.ActivateLevelCompleteScreen();
         }
     }
 }

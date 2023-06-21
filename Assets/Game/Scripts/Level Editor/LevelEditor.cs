@@ -101,6 +101,8 @@ namespace MatchTile.LevelEditor
 
         private void OnTap(Vector2 clickPosition)
         {
+            Debug.Log("OnTap LevelEditor");
+
             var worldPosition = Camera.main.ScreenToWorldPoint(clickPosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
 
@@ -122,16 +124,6 @@ namespace MatchTile.LevelEditor
                 TileManager.Instance.RemoveTile(hit.collider.gameObject.GetComponent<IBaseTile>());
                 Destroy(hit.collider.gameObject);
             }
-        }
-
-        public void Undo()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Redo()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
