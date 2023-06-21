@@ -89,12 +89,12 @@ namespace MatchTile.Tile
 
         public void ResetParents()
         {
-            parents = new List<IBaseTile>();
+            parents.Clear();
         }
 
         public void ResetChildren()
         {
-            children = new List<IBaseTile>();
+            children.Clear();
         }
 
         public bool CheckParentsExist()
@@ -132,7 +132,7 @@ namespace MatchTile.Tile
 
         public void FindChildren()
         {
-            Bounds overlapBounds = new Bounds(transform.position, transform.localScale);
+            Bounds overlapBounds = new Bounds(transform.position, new Vector3(2f, 2f, 1f));
             Collider2D[] colliders = Physics2D.OverlapBoxAll(overlapBounds.center, overlapBounds.size, 0f);
 
             foreach (var collider in colliders)
