@@ -30,7 +30,7 @@ namespace MatchTile.Manager
 
         void Start()
         {
-            
+
         }
 
         void Update()
@@ -40,13 +40,9 @@ namespace MatchTile.Manager
 
         public void Reset()
         {
-            foreach (var tile in tiles)
+            foreach (var tileGameObject in GameObject.FindGameObjectsWithTag("Tile"))
             {
-                if (tile != null && tile.GetGameobject() != null)
-                {
-                    tile.SetDestroyed();
-                    Destroy(tile.GetGameobject());
-                }
+                Destroy(tileGameObject);
             }
 
             tiles.Clear();

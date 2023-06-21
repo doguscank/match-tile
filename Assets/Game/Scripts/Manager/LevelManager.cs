@@ -58,11 +58,9 @@ namespace MatchTile.Manager
             else HelperPowerup.Instance.SetLocked(true);
         }
 
-        public void LoadLevel(int levelId, bool resetTileManager=true)
+        public void LoadLevel(int levelId)
         {
-            if (resetTileManager)
-                TileManager.Instance.Reset();
-
+            TileManager.Instance.Reset();
             TileBarManager.Instance.Reset();
 
             UpdatePowerupButtonStates();
@@ -86,7 +84,7 @@ namespace MatchTile.Manager
         public void LoadLastLevel(Scene scene, LoadSceneMode mode)
         {
             if (scene.name == "GameScreen" && scene.isLoaded)
-                LoadLevel(PlayerDataManager.Instance.playerLevel, resetTileManager: false);
+                LoadLevel(PlayerDataManager.Instance.playerLevel);
         }
 
         public void LoadLevels()
